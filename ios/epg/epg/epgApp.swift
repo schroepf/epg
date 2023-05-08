@@ -11,7 +11,7 @@ import SwiftUI
 struct epgApp: App {
     var body: some Scene {
 
-        let store = Store(reducer: reduce)
+        let store = Store(reducer: appReducer, state: AppState())
 
         WindowGroup {
             ContentView().environmentObject(store)

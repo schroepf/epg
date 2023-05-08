@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @EnvironmentObject var store: Store
+    @EnvironmentObject var store: Store<AppState>
 
     // hold properties of the view
     struct Props {
@@ -12,7 +12,7 @@ struct ContentView: View {
         let onAdd: (Int) -> Void
     }
 
-    private func map(state: State) -> Props {
+    private func map(state: CounterState) -> Props {
         Props(
             counter: state.counter,
             onIncrement: { store.dispatch(action: IncrementAction()) },
@@ -23,7 +23,7 @@ struct ContentView: View {
 
     var body: some View {
 
-        let props = map(state: store.state)
+        let props = map(state: store.state.counterState)
 
         VStack {
             Image(systemName: "globe")
@@ -50,7 +50,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
 
-        let store = Store(reducer: reduce)
+        let store = Store(reducer: counterReducer, state: CounterState())
         return ContentView().environmentObject(store)
     }
 }

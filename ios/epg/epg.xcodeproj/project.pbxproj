@@ -15,6 +15,8 @@
 		AE4575B42A08D5DE0003E19D /* epgUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575B32A08D5DE0003E19D /* epgUITests.swift */; };
 		AE4575B62A08D5DE0003E19D /* epgUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575B52A08D5DE0003E19D /* epgUITestsLaunchTests.swift */; };
 		AE4575C92A08D6F10003E19D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575C82A08D6F10003E19D /* Store.swift */; };
+		AE4575CC2A08E9D80003E19D /* CounterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575CB2A08E9D80003E19D /* CounterReducer.swift */; };
+		AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575CD2A08EA3A0003E19D /* AppReducer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		AE4575B32A08D5DE0003E19D /* epgUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = epgUITests.swift; sourceTree = "<group>"; };
 		AE4575B52A08D5DE0003E19D /* epgUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = epgUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		AE4575C82A08D6F10003E19D /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		AE4575CB2A08E9D80003E19D /* CounterReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterReducer.swift; sourceTree = "<group>"; };
+		AE4575CD2A08EA3A0003E19D /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +139,19 @@
 		AE4575C72A08D6F10003E19D /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				AE4575CA2A08E9A10003E19D /* Reducers */,
 				AE4575C82A08D6F10003E19D /* Store.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		AE4575CA2A08E9A10003E19D /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				AE4575CB2A08E9D80003E19D /* CounterReducer.swift */,
+				AE4575CD2A08EA3A0003E19D /* AppReducer.swift */,
+			);
+			path = Reducers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,8 +285,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE4575C92A08D6F10003E19D /* Store.swift in Sources */,
+				AE4575CC2A08E9D80003E19D /* CounterReducer.swift in Sources */,
 				AE45759A2A08D5DD0003E19D /* ContentView.swift in Sources */,
 				AE4575982A08D5DD0003E19D /* epgApp.swift in Sources */,
+				AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
