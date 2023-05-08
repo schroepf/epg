@@ -19,12 +19,14 @@ struct ChannelIcon: View {
         AsyncImage(url: icon.map { URL(string: $0.url) } ?? nil) { phase in
             switch phase {
             case .empty:
-                Image(systemName: "tv")
+                Image(systemName: "tv.fill")
             case .success(let image):
                 image.resizable()
                     .aspectRatio(contentMode: .fit)
             case .failure:
-                Image(systemName: "tv")
+                Image(systemName: "xmark.icloud.fill")
+            @unknown default:
+                EmptyView()
             }
         }
     }
