@@ -28,9 +28,6 @@ struct RatingView: View {
 
 struct RatingView_Previews: PreviewProvider {
     static var previews: some View {
-
-        let store = Store(reducer: appReducer, state: AppState())
-
         return RatingView(rating: .constant(5))
     }
 }
