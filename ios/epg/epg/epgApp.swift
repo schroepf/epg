@@ -2,6 +2,8 @@ import SwiftUI
 
 @main
 struct epgApp: App {
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
 
         let store = Store(
@@ -14,7 +16,7 @@ struct epgApp: App {
         )
 
         WindowGroup {
-            ContentView().environmentObject(store)
+            ChannelsListView().environmentObject(store)
         }
     }
 }

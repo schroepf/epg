@@ -10,7 +10,7 @@ func epgMiddleware() -> Middleware<AppState> {
                 let epg = Epg.parse(xmlData: data ?? Data())
                 print("Finished parsing XML: \(epg?.debugDescription ?? "nil")")
 
-                dispatch(SetEpgData(epg: epg))
+                dispatch(PersistEpgData(epg: epg))
             }
 
         case let action as LoadEpgDataFromRemoteXmlAsync:
@@ -20,7 +20,7 @@ func epgMiddleware() -> Middleware<AppState> {
                     switch result {
                     case .success(let epg):
                         print("Finished downloading XML from \(action.url): \(epg.debugDescription)")
-                        dispatch(SetEpgData(epg: epg))
+                        dispatch(PersistEpgData(epg: epg))
                     case .failure(let error):
                         print(error.localizedDescription)
                     }

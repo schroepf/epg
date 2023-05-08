@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct ChannelsListView: View {
     @EnvironmentObject var store: Store<AppState>
 
     // hold properties of the view
@@ -47,7 +47,7 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ChannelsListView_Previews: PreviewProvider {
     static var previews: some View {
 
         let store = Store(
@@ -56,6 +56,6 @@ struct ContentView_Previews: PreviewProvider {
             middlewares: [epgMiddleware()]
         )
 
-        return ContentView().environmentObject(store)
+        return ChannelsListView().environmentObject(store)
     }
 }
