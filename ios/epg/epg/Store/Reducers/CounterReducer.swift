@@ -14,5 +14,6 @@ func counterReducer(state: CounterState, action: Action) -> CounterState {
         break
     }
 
+    print(state)
     return state
 }
