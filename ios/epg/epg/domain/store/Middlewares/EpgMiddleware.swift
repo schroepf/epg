@@ -1,6 +1,6 @@
 import Foundation
 
-func epgMiddleware() -> Middleware<AppState> {
+func epgMiddleware(epgService: EpgService) -> Middleware<AppState> {
     return { state, action, dispatch in
         switch action {
         case _ as LoadEpgDataFromLocalXmlAsync:
@@ -15,7 +15,7 @@ func epgMiddleware() -> Middleware<AppState> {
         case let action as LoadEpgDataFromRemoteXmlAsync:
             Task {
                 do {
-                    let epg = try await EpgService().getEpg(url: action.url)
+                    let epg = try await epgService.getEpg(url: action.url)
                     print("Finished downloading XML from \(action.url): \(epg.debugDescription)")
                     dispatch(SaveEpgData(epg: epg))
                 } catch {

@@ -53,7 +53,7 @@ struct ChannelsListView_Previews: PreviewProvider {
         let store = Store(
             reducer: appReducer,
             state: AppState(),
-            middlewares: [epgMiddleware()]
+            middlewares: [epgMiddleware(epgService: EpgService())]
         )
 
         return ChannelsListView().environmentObject(store)

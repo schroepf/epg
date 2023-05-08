@@ -2,7 +2,11 @@ import SwiftUI
 
 @main
 struct epgApp: App {
-    let persistenceController = PersistenceController.shared
+    private let epgService: EpgService = .init()    // FIXME!!!
+    private let channelRepository: ChannelRepository = ChannelRepositoryImpl(
+        epgService: EpgService(),
+        dataSource: CoreDataChannelDataSource()
+    )
 
     var body: some Scene {
 
@@ -11,7 +15,8 @@ struct epgApp: App {
             state: AppState(),
             middlewares: [
                 logMiddleware(),
-                epgMiddleware()
+                epgMiddleware(epgService: epgService),
+                persistenceMiddleware(epgRepository: channelRepository)
             ]
         )
 

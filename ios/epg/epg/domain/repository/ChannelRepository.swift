@@ -5,6 +5,6 @@ enum ChannelError: Error {
 }
 
 protocol ChannelRepository {
-    func updateChannels()
+    func updateChannels(channels: [Channel]?) async
     func getAllChannels() async -> Result<[Channel], ChannelError>
 }

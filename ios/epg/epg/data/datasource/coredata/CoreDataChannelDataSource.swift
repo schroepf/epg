@@ -5,7 +5,7 @@ struct CoreDataChannelDataSource: ChannelDataSource {
     let container: NSPersistentContainer
 
     init(){
-        container = NSPersistentContainer(name: "Main")
+        container = NSPersistentContainer(name: "EpgModel")
         container.loadPersistentStores { description, error in
 
             if error != nil {
@@ -24,8 +24,8 @@ struct CoreDataChannelDataSource: ChannelDataSource {
             }
     }
 
-    func saveAll(channels: [Channel]) throws {
-        channels.forEach { channel in
+    func saveAll(channels: [Channel]?) async {
+        channels?.forEach { channel in
             let channelEntity = ChannelEntity(context: container.viewContext)
             channelEntity.id = channel.id
             channelEntity.name = channel.name
