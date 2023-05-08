@@ -27,7 +27,7 @@ struct LoadEpgDataFromRemoteXmlAsync: Action {
     let url: String
 }
 
-struct PersistEpgData: Action {
+struct SaveEpgData: Action {
     let epg: Epg?
 }
 

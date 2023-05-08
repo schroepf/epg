@@ -9,7 +9,7 @@ func epgMiddleware() -> Middleware<AppState> {
                 let epg = await Epg.parse(xmlData: data ?? Data())
 
                 print("Finished parsing XML: \(epg?.debugDescription ?? "nil")")
-                dispatch(PersistEpgData(epg: epg))
+                dispatch(SaveEpgData(epg: epg))
             }
 
         case let action as LoadEpgDataFromRemoteXmlAsync:
@@ -17,7 +17,7 @@ func epgMiddleware() -> Middleware<AppState> {
                 do {
                     let epg = try await EpgService().getEpg(url: action.url)
                     print("Finished downloading XML from \(action.url): \(epg.debugDescription)")
-                    dispatch(PersistEpgData(epg: epg))
+                    dispatch(SaveEpgData(epg: epg))
                 } catch {
                     print(error.localizedDescription)
                 }
