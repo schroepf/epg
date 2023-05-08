@@ -22,6 +22,18 @@
 		AE4575D62A08F2AB0003E19D /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575D52A08F2AB0003E19D /* AddTaskView.swift */; };
 		AE4575D92A08FB5B0003E19D /* LogMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575D82A08FB5B0003E19D /* LogMiddleware.swift */; };
 		AE4575DB2A08FC890003E19D /* IncrementMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575DA2A08FC890003E19D /* IncrementMiddleware.swift */; };
+		AE4575DE2A0904530003E19D /* View+embedInNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575DD2A0904530003E19D /* View+embedInNavigationView.swift */; };
+		AE4575E02A0904B50003E19D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575DF2A0904B50003E19D /* String+Extensions.swift */; };
+		AE4575E22A0905360003E19D /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575E12A0905360003E19D /* URLImage.swift */; };
+		AE4575E42A0905CF0003E19D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575E32A0905CF0003E19D /* RatingView.swift */; };
+		AE4575E72A0911DD0003E19D /* epg.xml.gz in Resources */ = {isa = PBXBuildFile; fileRef = AE4575E62A0911DD0003E19D /* epg.xml.gz */; };
+		AE4575EA2A091BF70003E19D /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = AE4575E92A091BF70003E19D /* XMLCoder */; };
+		AE4575EE2A0921510003E19D /* Epg.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575ED2A0921510003E19D /* Epg.swift */; };
+		AE4575F02A0921880003E19D /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575EF2A0921880003E19D /* Channel.swift */; };
+		AE4575F22A0921A90003E19D /* EpgEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F12A0921A90003E19D /* EpgEntry.swift */; };
+		AE4575F42A0923000003E19D /* Bundle+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F32A0923000003E19D /* Bundle+data.swift */; };
+		AE4575F62A0929D60003E19D /* EpgMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F52A0929D60003E19D /* EpgMiddleware.swift */; };
+		AE4575F82A092B0B0003E19D /* EpgReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F72A092B0B0003E19D /* EpgReducer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +73,17 @@
 		AE4575D52A08F2AB0003E19D /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		AE4575D82A08FB5B0003E19D /* LogMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMiddleware.swift; sourceTree = "<group>"; };
 		AE4575DA2A08FC890003E19D /* IncrementMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementMiddleware.swift; sourceTree = "<group>"; };
+		AE4575DD2A0904530003E19D /* View+embedInNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+embedInNavigationView.swift"; sourceTree = "<group>"; };
+		AE4575DF2A0904B50003E19D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		AE4575E12A0905360003E19D /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
+		AE4575E32A0905CF0003E19D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		AE4575E62A0911DD0003E19D /* epg.xml.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = epg.xml.gz; sourceTree = "<group>"; };
+		AE4575ED2A0921510003E19D /* Epg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Epg.swift; sourceTree = "<group>"; };
+		AE4575EF2A0921880003E19D /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		AE4575F12A0921A90003E19D /* EpgEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgEntry.swift; sourceTree = "<group>"; };
+		AE4575F32A0923000003E19D /* Bundle+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+data.swift"; sourceTree = "<group>"; };
+		AE4575F52A0929D60003E19D /* EpgMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgMiddleware.swift; sourceTree = "<group>"; };
+		AE4575F72A092B0B0003E19D /* EpgReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgReducer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4575EA2A091BF70003E19D /* XMLCoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +135,9 @@
 		AE4575962A08D5DD0003E19D /* epg */ = {
 			isa = PBXGroup;
 			children = (
+				AE4575EB2A0921200003E19D /* data */,
+				AE4575E52A0911B00003E19D /* Resources */,
+				AE4575DC2A0904380003E19D /* Extensions */,
 				AE4575D42A08F2920003E19D /* View */,
 				AE4575CF2A08F0AC0003E19D /* Models */,
 				AE4575C72A08D6F10003E19D /* Store */,
@@ -164,6 +191,7 @@
 				AE4575CB2A08E9D80003E19D /* CounterReducer.swift */,
 				AE4575CD2A08EA3A0003E19D /* AppReducer.swift */,
 				AE4575D22A08F1230003E19D /* TaskReducer.swift */,
+				AE4575F72A092B0B0003E19D /* EpgReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -180,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				AE4575D52A08F2AB0003E19D /* AddTaskView.swift */,
+				AE4575E12A0905360003E19D /* URLImage.swift */,
+				AE4575E32A0905CF0003E19D /* RatingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,8 +219,45 @@
 			children = (
 				AE4575D82A08FB5B0003E19D /* LogMiddleware.swift */,
 				AE4575DA2A08FC890003E19D /* IncrementMiddleware.swift */,
+				AE4575F52A0929D60003E19D /* EpgMiddleware.swift */,
 			);
 			path = Middlewares;
+			sourceTree = "<group>";
+		};
+		AE4575DC2A0904380003E19D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AE4575DD2A0904530003E19D /* View+embedInNavigationView.swift */,
+				AE4575DF2A0904B50003E19D /* String+Extensions.swift */,
+				AE4575F32A0923000003E19D /* Bundle+data.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AE4575E52A0911B00003E19D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AE4575E62A0911DD0003E19D /* epg.xml.gz */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AE4575EB2A0921200003E19D /* data */ = {
+			isa = PBXGroup;
+			children = (
+				AE4575EC2A09212C0003E19D /* model */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		AE4575EC2A09212C0003E19D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AE4575ED2A0921510003E19D /* Epg.swift */,
+				AE4575F12A0921A90003E19D /* EpgEntry.swift */,
+				AE4575EF2A0921880003E19D /* Channel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +276,9 @@
 			dependencies = (
 			);
 			name = epg;
+			packageProductDependencies = (
+				AE4575E92A091BF70003E19D /* XMLCoder */,
+			);
 			productName = epg;
 			productReference = AE4575942A08D5DD0003E19D /* epg.app */;
 			productType = "com.apple.product-type.application";
@@ -281,6 +351,9 @@
 				Base,
 			);
 			mainGroup = AE45758B2A08D5DD0003E19D;
+			packageReferences = (
+				AE4575E82A091BF70003E19D /* XCRemoteSwiftPackageReference "XMLCoder" */,
+			);
 			productRefGroup = AE4575952A08D5DD0003E19D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -297,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4575E72A0911DD0003E19D /* epg.xml.gz in Resources */,
 				AE4575A02A08D5DE0003E19D /* Preview Assets.xcassets in Resources */,
 				AE45759C2A08D5DE0003E19D /* Assets.xcassets in Resources */,
 			);
@@ -323,16 +397,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4575EE2A0921510003E19D /* Epg.swift in Sources */,
+				AE4575F82A092B0B0003E19D /* EpgReducer.swift in Sources */,
+				AE4575F22A0921A90003E19D /* EpgEntry.swift in Sources */,
+				AE4575F02A0921880003E19D /* Channel.swift in Sources */,
 				AE4575C92A08D6F10003E19D /* Store.swift in Sources */,
 				AE4575CC2A08E9D80003E19D /* CounterReducer.swift in Sources */,
 				AE45759A2A08D5DD0003E19D /* ContentView.swift in Sources */,
 				AE4575D62A08F2AB0003E19D /* AddTaskView.swift in Sources */,
+				AE4575E02A0904B50003E19D /* String+Extensions.swift in Sources */,
+				AE4575E22A0905360003E19D /* URLImage.swift in Sources */,
 				AE4575982A08D5DD0003E19D /* epgApp.swift in Sources */,
+				AE4575DE2A0904530003E19D /* View+embedInNavigationView.swift in Sources */,
 				AE4575D32A08F1230003E19D /* TaskReducer.swift in Sources */,
 				AE4575D12A08F0BC0003E19D /* Task.swift in Sources */,
 				AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */,
 				AE4575D92A08FB5B0003E19D /* LogMiddleware.swift in Sources */,
+				AE4575F62A0929D60003E19D /* EpgMiddleware.swift in Sources */,
 				AE4575DB2A08FC890003E19D /* IncrementMiddleware.swift in Sources */,
+				AE4575E42A0905CF0003E19D /* RatingView.swift in Sources */,
+				AE4575F42A0923000003E19D /* Bundle+data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +760,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AE4575E82A091BF70003E19D /* XCRemoteSwiftPackageReference "XMLCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoreOffice/XMLCoder.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.17.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AE4575E92A091BF70003E19D /* XMLCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE4575E82A091BF70003E19D /* XCRemoteSwiftPackageReference "XMLCoder" */;
+			productName = XMLCoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE45758C2A08D5DD0003E19D /* Project object */;
 }

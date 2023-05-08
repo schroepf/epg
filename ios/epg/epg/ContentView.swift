@@ -12,6 +12,7 @@ struct ContentView: View {
         let onDecrement: () -> Void
         let onAdd: (Int) -> Void
         let onIncrementAsync: () -> Void
+        let onLoadEpgXml: () -> Void
     }
 
     private func map(state: CounterState) -> Props {
@@ -20,7 +21,8 @@ struct ContentView: View {
             onIncrement: { store.dispatch(action: IncrementAction()) },
             onDecrement: { store.dispatch(action: DecrementAction()) },
             onAdd: { store.dispatch(action: AddAction(value: $0)) },
-            onIncrementAsync: { store.dispatch(action: IncrementActionAsync()) }
+            onIncrementAsync: { store.dispatch(action: IncrementActionAsync()) },
+            onLoadEpgXml: { store.dispatch(action: LoadEpgDataFromXmlAsync() ) }
         )
     }
 
@@ -48,6 +50,10 @@ struct ContentView: View {
 
             Button("Add 100") {
                 props.onAdd(100)
+            }
+
+            Button("Load XML") {
+                props.onLoadEpgXml()
             }
 
             Spacer()

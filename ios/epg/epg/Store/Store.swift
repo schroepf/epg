@@ -12,6 +12,7 @@ protocol ReduxState { }
 struct AppState: ReduxState {
     var counterState = CounterState()
     var taskState = TaskState()
+    var epgState = EpgState()
 }
 
 struct TaskState: ReduxState {
@@ -22,6 +23,9 @@ struct CounterState: ReduxState {
     var counter: Int = 0
 }
 
+struct EpgState: ReduxState {
+    var epg: Epg? = nil
+}
 
 // MARK: - Actions
 
@@ -36,6 +40,11 @@ struct AddTaskAction: Action {
 
 struct AddAction: Action {
     let value: Int
+}
+
+struct LoadEpgDataFromXmlAsync: Action { }
+struct SetEpgData: Action {
+    let epg: Epg?
 }
 
 // MARK: - Store
