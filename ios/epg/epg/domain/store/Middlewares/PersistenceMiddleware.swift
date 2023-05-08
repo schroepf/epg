@@ -8,6 +8,11 @@ func persistenceMiddleware(epgRepository: ChannelRepository) -> Middleware<AppSt
                 await epgRepository.updateChannels(channels: action.epg?.channels)
             }
 
+        case _ as LoadChannels:
+            Task {
+                let channels = await epgRepository.getAllChannels()
+                dispatch(SetChannels(result: channels))
+            }
         default:
             break
         }

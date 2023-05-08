@@ -26,7 +26,7 @@
 		AE4575F22A0921A90003E19D /* EpgEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F12A0921A90003E19D /* EpgEntry.swift */; };
 		AE4575F42A0923000003E19D /* Bundle+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F32A0923000003E19D /* Bundle+data.swift */; };
 		AE4575F62A0929D60003E19D /* EpgMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F52A0929D60003E19D /* EpgMiddleware.swift */; };
-		AE4575F82A092B0B0003E19D /* EpgReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F72A092B0B0003E19D /* EpgReducer.swift */; };
+		AE4575F82A092B0B0003E19D /* ChannelsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575F72A092B0B0003E19D /* ChannelsReducer.swift */; };
 		AE4575FB2A092ED20003E19D /* EpgService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575FA2A092ED20003E19D /* EpgService.swift */; };
 		AE4575FD2A093BA50003E19D /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575FC2A093BA50003E19D /* ChannelCell.swift */; };
 		AE45763F2A094FF60003E19D /* EpgModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE45763D2A094FF60003E19D /* EpgModel.xcdatamodeld */; };
@@ -35,6 +35,13 @@
 		AE45764B2A095D000003E19D /* ChannelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45764A2A095D000003E19D /* ChannelRepository.swift */; };
 		AE45764E2A095DD10003E19D /* ChannelRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45764D2A095DD10003E19D /* ChannelRepositoryImpl.swift */; };
 		AE4576502A0976800003E19D /* PersistenceMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45764F2A0976800003E19D /* PersistenceMiddleware.swift */; };
+		AE4576532A0984C40003E19D /* LoadEpgDataFromLocalXmlAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576522A0984C40003E19D /* LoadEpgDataFromLocalXmlAsync.swift */; };
+		AE4576552A0984E40003E19D /* LoadEpgDataFromRemoteXmlAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576542A0984E40003E19D /* LoadEpgDataFromRemoteXmlAsync.swift */; };
+		AE4576572A0984FE0003E19D /* LoadChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576562A0984FE0003E19D /* LoadChannels.swift */; };
+		AE4576592A09852B0003E19D /* SaveEpgData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576582A09852B0003E19D /* SaveEpgData.swift */; };
+		AE45765C2A0985540003E19D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45765B2A0985540003E19D /* AppState.swift */; };
+		AE45765E2A09856B0003E19D /* ChannelsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45765D2A09856B0003E19D /* ChannelsState.swift */; };
+		AE4576602A09864B0003E19D /* SetChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45765F2A09864B0003E19D /* SetChannels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +84,7 @@
 		AE4575F12A0921A90003E19D /* EpgEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgEntry.swift; sourceTree = "<group>"; };
 		AE4575F32A0923000003E19D /* Bundle+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+data.swift"; sourceTree = "<group>"; };
 		AE4575F52A0929D60003E19D /* EpgMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgMiddleware.swift; sourceTree = "<group>"; };
-		AE4575F72A092B0B0003E19D /* EpgReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgReducer.swift; sourceTree = "<group>"; };
+		AE4575F72A092B0B0003E19D /* ChannelsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsReducer.swift; sourceTree = "<group>"; };
 		AE4575FA2A092ED20003E19D /* EpgService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgService.swift; sourceTree = "<group>"; };
 		AE4575FC2A093BA50003E19D /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		AE45763E2A094FF60003E19D /* EpgModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EpgModel.xcdatamodel; sourceTree = "<group>"; };
@@ -86,6 +93,13 @@
 		AE45764A2A095D000003E19D /* ChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepository.swift; sourceTree = "<group>"; };
 		AE45764D2A095DD10003E19D /* ChannelRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepositoryImpl.swift; sourceTree = "<group>"; };
 		AE45764F2A0976800003E19D /* PersistenceMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceMiddleware.swift; sourceTree = "<group>"; };
+		AE4576522A0984C40003E19D /* LoadEpgDataFromLocalXmlAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadEpgDataFromLocalXmlAsync.swift; sourceTree = "<group>"; };
+		AE4576542A0984E40003E19D /* LoadEpgDataFromRemoteXmlAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadEpgDataFromRemoteXmlAsync.swift; sourceTree = "<group>"; };
+		AE4576562A0984FE0003E19D /* LoadChannels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadChannels.swift; sourceTree = "<group>"; };
+		AE4576582A09852B0003E19D /* SaveEpgData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEpgData.swift; sourceTree = "<group>"; };
+		AE45765B2A0985540003E19D /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AE45765D2A09856B0003E19D /* ChannelsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsState.swift; sourceTree = "<group>"; };
+		AE45765F2A09864B0003E19D /* SetChannels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetChannels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +156,6 @@
 				AE4575EB2A0921200003E19D /* data */,
 				AE4575E52A0911B00003E19D /* Resources */,
 				AE4575DC2A0904380003E19D /* Extensions */,
-				AE4575D42A08F2920003E19D /* View */,
 				AE4575972A08D5DD0003E19D /* epgApp.swift */,
 				AE45759B2A08D5DE0003E19D /* Assets.xcassets */,
 				AE45759D2A08D5DE0003E19D /* epg.entitlements */,
@@ -179,6 +192,8 @@
 		AE4575C72A08D6F10003E19D /* store */ = {
 			isa = PBXGroup;
 			children = (
+				AE45765A2A0985490003E19D /* State */,
+				AE4576512A09849C0003E19D /* Actions */,
 				AE4575D72A08FB4E0003E19D /* Middlewares */,
 				AE4575CA2A08E9A10003E19D /* Reducers */,
 				AE4575C82A08D6F10003E19D /* Store.swift */,
@@ -190,16 +205,9 @@
 			isa = PBXGroup;
 			children = (
 				AE4575CD2A08EA3A0003E19D /* AppReducer.swift */,
-				AE4575F72A092B0B0003E19D /* EpgReducer.swift */,
+				AE4575F72A092B0B0003E19D /* ChannelsReducer.swift */,
 			);
 			path = Reducers;
-			sourceTree = "<group>";
-		};
-		AE4575D42A08F2920003E19D /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		AE4575D72A08FB4E0003E19D /* Middlewares */ = {
@@ -317,6 +325,27 @@
 				AE45764D2A095DD10003E19D /* ChannelRepositoryImpl.swift */,
 			);
 			path = repository;
+			sourceTree = "<group>";
+		};
+		AE4576512A09849C0003E19D /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				AE4576522A0984C40003E19D /* LoadEpgDataFromLocalXmlAsync.swift */,
+				AE4576542A0984E40003E19D /* LoadEpgDataFromRemoteXmlAsync.swift */,
+				AE4576562A0984FE0003E19D /* LoadChannels.swift */,
+				AE4576582A09852B0003E19D /* SaveEpgData.swift */,
+				AE45765F2A09864B0003E19D /* SetChannels.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		AE45765A2A0985490003E19D /* State */ = {
+			isa = PBXGroup;
+			children = (
+				AE45765B2A0985540003E19D /* AppState.swift */,
+				AE45765D2A09856B0003E19D /* ChannelsState.swift */,
+			);
+			path = State;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,9 +486,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE4575EE2A0921510003E19D /* Epg.swift in Sources */,
+				AE4576572A0984FE0003E19D /* LoadChannels.swift in Sources */,
 				AE45764E2A095DD10003E19D /* ChannelRepositoryImpl.swift in Sources */,
+				AE4576552A0984E40003E19D /* LoadEpgDataFromRemoteXmlAsync.swift in Sources */,
 				AE4575FD2A093BA50003E19D /* ChannelCell.swift in Sources */,
-				AE4575F82A092B0B0003E19D /* EpgReducer.swift in Sources */,
+				AE4575F82A092B0B0003E19D /* ChannelsReducer.swift in Sources */,
 				AE4575F22A0921A90003E19D /* EpgEntry.swift in Sources */,
 				AE4575F02A0921880003E19D /* Channel.swift in Sources */,
 				AE4575C92A08D6F10003E19D /* Store.swift in Sources */,
@@ -470,13 +501,18 @@
 				AE4575FB2A092ED20003E19D /* EpgService.swift in Sources */,
 				AE4575982A08D5DD0003E19D /* epgApp.swift in Sources */,
 				AE4575DE2A0904530003E19D /* View+embedInNavigationView.swift in Sources */,
+				AE4576602A09864B0003E19D /* SetChannels.swift in Sources */,
 				AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */,
 				AE45764B2A095D000003E19D /* ChannelRepository.swift in Sources */,
+				AE4576592A09852B0003E19D /* SaveEpgData.swift in Sources */,
 				AE4576502A0976800003E19D /* PersistenceMiddleware.swift in Sources */,
 				AE4575D92A08FB5B0003E19D /* LogMiddleware.swift in Sources */,
 				AE4575F62A0929D60003E19D /* EpgMiddleware.swift in Sources */,
 				AE4576482A09581C0003E19D /* CoreDataChannelDataSource.swift in Sources */,
+				AE45765C2A0985540003E19D /* AppState.swift in Sources */,
 				AE4575F42A0923000003E19D /* Bundle+data.swift in Sources */,
+				AE4576532A0984C40003E19D /* LoadEpgDataFromLocalXmlAsync.swift in Sources */,
+				AE45765E2A09856B0003E19D /* ChannelsState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

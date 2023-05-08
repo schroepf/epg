@@ -9,27 +9,9 @@ typealias Middleware<StoreState: ReduxState> = (StoreState, Action, @escaping Di
 
 protocol ReduxState { }
 
-struct AppState: ReduxState {
-    var epgState = EpgState()
-}
-
-struct EpgState: ReduxState {
-    var epg: Epg? = nil
-}
-
 // MARK: - Actions
 
 protocol Action { }
-
-struct LoadEpgDataFromLocalXmlAsync: Action { }
-
-struct LoadEpgDataFromRemoteXmlAsync: Action {
-    let url: String
-}
-
-struct SaveEpgData: Action {
-    let epg: Epg?
-}
 
 // MARK: - Store
 

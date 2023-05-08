@@ -8,19 +8,21 @@ struct ChannelsListView: View {
         let channels: [Channel]
         let onLoadRemoteEpgXml: () -> Void
         let onLoadLocalEpgXml: () -> Void
+        let onLoadChannels: () -> Void
     }
 
-    private func map(state: EpgState) -> Props {
+    private func map(state: ChannelsState) -> Props {
         Props(
-            channels: state.epg?.channels ?? [],
+            channels: state.channels ?? [],
             onLoadRemoteEpgXml: { store.dispatch(action: LoadEpgDataFromRemoteXmlAsync(url: "https://elres.de/epg")) },
-            onLoadLocalEpgXml: { store.dispatch(action: LoadEpgDataFromLocalXmlAsync() ) }
+            onLoadLocalEpgXml: { store.dispatch(action: LoadEpgDataFromLocalXmlAsync() ) },
+            onLoadChannels: { store.dispatch(action: LoadChannels()) }
         )
     }
 
     var body: some View {
 
-        let props = map(state: store.state.epgState)
+        let props = map(state: store.state.channelsState)
 
         VStack {
             Text("Load EPG Data")
@@ -34,6 +36,11 @@ struct ChannelsListView: View {
                     props.onLoadLocalEpgXml()
                 }
             }
+
+            Button("Load Channels") {
+                props.onLoadChannels()
+            }
+
 
             Spacer()
 
