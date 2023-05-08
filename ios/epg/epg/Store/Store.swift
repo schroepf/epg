@@ -23,4 +23,8 @@ class Store {
         self.reducer = reducer
         self.state = state
     }
+
+    func dispatch(action: Action) {
+        state = reduce(state: state, action: action)
+    }
 }
