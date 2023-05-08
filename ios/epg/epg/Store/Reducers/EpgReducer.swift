@@ -1,6 +1,6 @@
 import Foundation
 
-func taskReducer(state: EpgState, action: Action) -> EpgState {
+func epgReducer(state: EpgState, action: Action) -> EpgState {
     var state = state
 
     switch action {

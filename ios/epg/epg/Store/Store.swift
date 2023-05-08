@@ -10,17 +10,7 @@ typealias Middleware<StoreState: ReduxState> = (StoreState, Action, @escaping Di
 protocol ReduxState { }
 
 struct AppState: ReduxState {
-    var counterState = CounterState()
-    var taskState = TaskState()
     var epgState = EpgState()
-}
-
-struct TaskState: ReduxState {
-    var tasks: [Task] = .init()
-}
-
-struct CounterState: ReduxState {
-    var counter: Int = 0
 }
 
 struct EpgState: ReduxState {
@@ -31,18 +21,12 @@ struct EpgState: ReduxState {
 
 protocol Action { }
 
-struct IncrementAction: Action { }
-struct DecrementAction: Action { }
-struct IncrementActionAsync: Action { }
-struct AddTaskAction: Action {
-    let task: Task
+struct LoadEpgDataFromLocalXmlAsync: Action { }
+
+struct LoadEpgDataFromRemoteXmlAsync: Action {
+    let url: String
 }
 
-struct AddAction: Action {
-    let value: Int
-}
-
-struct LoadEpgDataFromXmlAsync: Action { }
 struct SetEpgData: Action {
     let epg: Epg?
 }

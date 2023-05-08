@@ -9,7 +9,6 @@ struct epgApp: App {
             state: AppState(),
             middlewares: [
                 logMiddleware(),
-                incrementMiddleware(),
                 epgMiddleware()
             ]
         )
