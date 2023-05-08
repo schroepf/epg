@@ -10,8 +10,11 @@ import SwiftUI
 @main
 struct epgApp: App {
     var body: some Scene {
+
+        let store = Store(reducer: reduce)
+
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(store)
         }
     }
 }

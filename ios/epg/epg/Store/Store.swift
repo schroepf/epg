@@ -28,7 +28,7 @@ class Store: ObservableObject {
 
     @Published var state: State
 
-    init(reducer: @escaping Reducer, state: State) {
+    init(reducer: @escaping Reducer, state: State = State()) {
         self.reducer = reducer
         self.state = state
     }
