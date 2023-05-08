@@ -1,14 +1,23 @@
 import Foundation
 
 struct State {
-
+    var counter: Int = 0
 }
 
-protocol Action {
+protocol Action { }
 
-}
+struct IncrementAction: Action { }
 
 func reduce(state: State, action: Action) -> State {
+    var state = state
+
+    switch action {
+    case _ as IncrementAction:
+        state.counter += 1
+    default:
+        break
+    }
+
     return state
 }
 
