@@ -13,7 +13,7 @@ struct Channel: Codable {
 }
 
 struct Icon: Codable {
-    let url: String
+    let url: URL
 
     enum CodingKeys: String, CodingKey {
         case url = "src"

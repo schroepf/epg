@@ -12,7 +12,7 @@ struct Epg: Codable {
 }
 
 extension Epg {
-    static func parse(xmlData: Data) -> Self? {
+    static func parse(xmlData: Data) async -> Self? {
         let decoder = XMLDecoder()
         do {
             let tv = try decoder.decode(Self.self, from: xmlData)
