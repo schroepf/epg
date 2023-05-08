@@ -1,19 +1,34 @@
-//
-//  ContentView.swift
-//  epg
-//
-//  Created by Tobias Schröpf on 08.05.23.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+
+    @EnvironmentObject var store: Store
+
+    // hold properties of the view
+    struct Props {
+        let counter: Int
+        let onIncrement: () -> Void
+    }
+
+    private func map(state: State) -> Props {
+        Props(counter: state.counter) {
+            store.dispatch(action: IncrementAction())
+        }
+    }
+
     var body: some View {
+
+        let props = map(state: store.state)
+
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Counter: \(props.counter)")
+
+            Button("Increment") {
+                props.onIncrement()
+            }
         }
         .padding()
     }
