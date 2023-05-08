@@ -2,25 +2,39 @@ import Foundation
 
 typealias Reducer<State: ReduxState> = (_ state: State, _ action: Action) -> State
 
+// MARK: - States
+
 protocol ReduxState { }
 
 struct AppState: ReduxState {
     var counterState = CounterState()
+    var taskState = TaskState()
+}
+
+struct TaskState: ReduxState {
+    var tasks: [Task] = .init()
 }
 
 struct CounterState: ReduxState {
     var counter: Int = 0
 }
 
+
+// MARK: - Actions
+
 protocol Action { }
 
 struct IncrementAction: Action { }
 struct DecrementAction: Action { }
+struct AddTaskAction: Action {
+    let task: Task
+}
 
 struct AddAction: Action {
     let value: Int
 }
 
+// MARK: - Store
 
 class Store<StoreState: ReduxState>: ObservableObject {
     private var reducer: Reducer<StoreState>

@@ -17,6 +17,9 @@
 		AE4575C92A08D6F10003E19D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575C82A08D6F10003E19D /* Store.swift */; };
 		AE4575CC2A08E9D80003E19D /* CounterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575CB2A08E9D80003E19D /* CounterReducer.swift */; };
 		AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575CD2A08EA3A0003E19D /* AppReducer.swift */; };
+		AE4575D12A08F0BC0003E19D /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575D02A08F0BC0003E19D /* Task.swift */; };
+		AE4575D32A08F1230003E19D /* TaskReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575D22A08F1230003E19D /* TaskReducer.swift */; };
+		AE4575D62A08F2AB0003E19D /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575D52A08F2AB0003E19D /* AddTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		AE4575C82A08D6F10003E19D /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		AE4575CB2A08E9D80003E19D /* CounterReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterReducer.swift; sourceTree = "<group>"; };
 		AE4575CD2A08EA3A0003E19D /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		AE4575D02A08F0BC0003E19D /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		AE4575D22A08F1230003E19D /* TaskReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskReducer.swift; sourceTree = "<group>"; };
+		AE4575D52A08F2AB0003E19D /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,8 @@
 		AE4575962A08D5DD0003E19D /* epg */ = {
 			isa = PBXGroup;
 			children = (
+				AE4575D42A08F2920003E19D /* View */,
+				AE4575CF2A08F0AC0003E19D /* Models */,
 				AE4575C72A08D6F10003E19D /* Store */,
 				AE4575972A08D5DD0003E19D /* epgApp.swift */,
 				AE4575992A08D5DD0003E19D /* ContentView.swift */,
@@ -150,8 +158,25 @@
 			children = (
 				AE4575CB2A08E9D80003E19D /* CounterReducer.swift */,
 				AE4575CD2A08EA3A0003E19D /* AppReducer.swift */,
+				AE4575D22A08F1230003E19D /* TaskReducer.swift */,
 			);
 			path = Reducers;
+			sourceTree = "<group>";
+		};
+		AE4575CF2A08F0AC0003E19D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AE4575D02A08F0BC0003E19D /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AE4575D42A08F2920003E19D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AE4575D52A08F2AB0003E19D /* AddTaskView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,7 +312,10 @@
 				AE4575C92A08D6F10003E19D /* Store.swift in Sources */,
 				AE4575CC2A08E9D80003E19D /* CounterReducer.swift in Sources */,
 				AE45759A2A08D5DD0003E19D /* ContentView.swift in Sources */,
+				AE4575D62A08F2AB0003E19D /* AddTaskView.swift in Sources */,
 				AE4575982A08D5DD0003E19D /* epgApp.swift in Sources */,
+				AE4575D32A08F1230003E19D /* TaskReducer.swift in Sources */,
+				AE4575D12A08F0BC0003E19D /* Task.swift in Sources */,
 				AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
