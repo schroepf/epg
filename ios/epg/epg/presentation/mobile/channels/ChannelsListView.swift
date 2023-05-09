@@ -32,12 +32,13 @@ struct ChannelsListView: View {
             }
             .listStyle(.plain)
         }
-        .onAppear {
+        .task {
             props.onLoadChannels()
         }
         .navigationTitle("Channels")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
+#if os(iOS)
                 Menu {
                     Button {
                         props.onFetchLocalEpgXml()
@@ -59,6 +60,7 @@ struct ChannelsListView: View {
                 } label: {
                     Image(systemName: "gearshape")
                 }
+#endif
             }
         }
         .embedInNavigationView()

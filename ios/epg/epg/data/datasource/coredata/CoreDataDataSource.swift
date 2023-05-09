@@ -1,12 +1,11 @@
 import Foundation
 import CoreData
 
-struct CoreDataDataSource {
+class CoreDataDataSource {
     private let container: NSPersistentContainer
 
-    private var context: NSManagedObjectContext {
-        container.viewContext
-    }
+    private lazy var viewContext: NSManagedObjectContext = container.viewContext
+    private lazy var backgroundContext: NSManagedObjectContext = container.newBackgroundContext()
 
     init(){
         container = NSPersistentContainer(name: "EpgModel")
@@ -17,77 +16,71 @@ struct CoreDataDataSource {
             }
         }
     }
-
-    private func deleteAllEntities(entityType: NSManagedObject.Type) throws {
-        let fetchRequest: NSFetchRequest<any NSFetchRequestResult> = entityType.fetchRequest()
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        try context.execute(batchDeleteRequest)
-        try saveContext()
-    }
-
-    private func saveContext() throws {
-        guard context.hasChanges else {
-            return
-        }
-
-        try context.save()
-    }
 }
 
 extension CoreDataDataSource: ChannelDataSource {
     func getAll() async throws -> [Channel] {
-        let request = ChannelEntity.fetchRequest()
+        return try await viewContext.perform {
+            let request = ChannelEntity.fetchRequest()
 
-        return try container.viewContext
-            .fetch(request)
-            .compactMap { channelEntity in
-                Channel(entity: channelEntity)
-            }
+            return try self.viewContext
+                .fetch(request)
+                .compactMap { channelEntity in
+                    Channel(entity: channelEntity)
+                }
+        }
     }
 
     func saveAll(channels: [Channel]?) async throws {
-        try deleteAllEntities(entityType: ChannelEntity.self)
+        let context = backgroundContext
+        try await context.perform {
+            try context.deleteAllEntities(entityType: ChannelEntity.self)
 
-        try channels?.forEach { channel in
-            let channelEntity = ChannelEntity(context: container.viewContext)
+            try channels?.forEach { channel in
+                let channelEntity = ChannelEntity(context: context)
 
-            channelEntity.id = channel.id
-            channelEntity.name = channel.name
-            channelEntity.iconUrl = channel.icon?.url
-            
-            try saveContext()
+                channelEntity.id = channel.id
+                channelEntity.name = channel.name
+                channelEntity.iconUrl = channel.icon?.url
+
+                try context.saveIfNeeded()
+            }
         }
     }
 }
 
 extension CoreDataDataSource: EpgDataSource {
     func saveAll(epgEntries: [EpgEntry]?) async throws {
-        try deleteAllEntities(entityType: EpgEntryEntity.self)
+        let context = backgroundContext
 
-        try epgEntries?.forEach { epgEntry in
-            let channelEntity = EpgEntryEntity(context: container.viewContext)
+        try await context.perform {
+            try context.deleteAllEntities(entityType: EpgEntryEntity.self)
 
-            channelEntity.channelId = epgEntry.channelId
-            channelEntity.title = epgEntry.title
-            channelEntity.summary = epgEntry.summary
-            channelEntity.start = epgEntry.start
-            channelEntity.stop = epgEntry.stop
+            try epgEntries?.forEach { epgEntry in
+                let channelEntity = EpgEntryEntity(context: context)
 
-            try saveContext()
+                channelEntity.channelId = epgEntry.channelId
+                channelEntity.title = epgEntry.title
+                channelEntity.summary = epgEntry.summary
+                channelEntity.start = epgEntry.start
+                channelEntity.stop = epgEntry.stop
+
+                try context.saveIfNeeded()
+            }
         }
-
     }
 
     func getEntries(channelId: String) async throws -> [EpgEntry] {
-        let request = EpgEntryEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "channelId == %@", channelId)
+        return try await viewContext.perform {
+            let request = EpgEntryEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "channelId == %@", channelId)
 
-        return try container.viewContext
-            .fetch(request)
-            .compactMap { epgEntity in
-                EpgEntry(entity: epgEntity)
-            }
+            return try self.viewContext
+                .fetch(request)
+                .compactMap { epgEntity in
+                    EpgEntry(entity: epgEntity)
+                }
+        }
     }
 }
 
@@ -108,5 +101,23 @@ extension EpgEntry {
         }
 
         self.init(channelId: channeldId, title: title, summary: entity.summary, start: start, stop: stop)
+    }
+}
+
+extension NSManagedObjectContext {
+    func saveIfNeeded() throws {
+        guard hasChanges else {
+            return
+        }
+
+        try save()
+    }
+
+    func deleteAllEntities(entityType: NSManagedObject.Type) throws {
+        let fetchRequest: NSFetchRequest<any NSFetchRequestResult> = entityType.fetchRequest()
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        try execute(batchDeleteRequest)
+        try saveIfNeeded()
     }
 }

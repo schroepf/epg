@@ -1,7 +1,7 @@
 import Foundation
 import XMLCoder
 
-struct Epg: Codable {
+struct Epg: Decodable {
     let channels: [Channel]
     let epgEntries: [EpgEntry]
 

@@ -3,7 +3,7 @@ import SwiftUI
 @main
 struct epgApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     private let epgService: EpgService = .init()
     private let coreDataDataSource = CoreDataDataSource()
 
@@ -22,7 +22,11 @@ struct epgApp: App {
         )
 
         WindowGroup {
+            #if os(iOS)
             ChannelsListView().environmentObject(store)
+            #elseif os(tvOS)
+            TVChannelsListView().environmentObject(store)
+            #endif
         }
     }
 }

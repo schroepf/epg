@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ChannelDetailsView: View {
+struct TVChannelDetailsView: View {
     @EnvironmentObject var store: Store<AppState>
 
     let channelId: String
@@ -14,7 +14,7 @@ struct ChannelDetailsView: View {
 
     private func map(state: ChannelDetailsState) -> Props {
         Props(
-            title: state.channel?.name ?? "No channel found",
+            title: channelId,
             epgData: state.epgData,
             logoUrl: state.channel?.icon?.url,
             onLoadChannelDetails: {
@@ -25,30 +25,19 @@ struct ChannelDetailsView: View {
 
     var body: some View {
         let props = map(state: store.state.channelDetailsState)
-        VStack {
-            AsyncImage(url: props.logoUrl)
 
-            List(props.epgData ?? [], id: \.id) { epg in
-                EpgCell(epgEntry: epg)
-            }
-            .listStyle(.plain)
+        VStack {
+            Text(props.title)
         }
-        .navigationTitle(props.title)
-        .onAppear {
+        .focusable()
+        .task {
             props.onLoadChannelDetails()
         }
     }
 }
 
-struct ChannelDetailsView_Previews: PreviewProvider {
+struct TVChannelDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        let store = Store(
-            reducer: appReducer,
-            state: AppState(),
-            middlewares: [epgMiddleware(epgService: EpgService())]
-        )
-
-        return ChannelDetailsView(channelId: "BRde")
-            .environmentObject(store)
+        TVChannelDetailsView(channelId: "BYde")
     }
 }

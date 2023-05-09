@@ -1,6 +1,6 @@
 import Foundation
 
-struct EpgEntry: Codable {
+struct EpgEntry: Decodable, Identifiable {
     let id = UUID()
     let channelId: String
     let title: String

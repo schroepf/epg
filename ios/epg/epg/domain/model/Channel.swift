@@ -1,6 +1,6 @@
 import Foundation
 
-struct Channel: Codable {
+struct Channel: Decodable, Identifiable {
     let id: String
     let name: String
     let icon: Icon?
