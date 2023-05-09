@@ -5,7 +5,7 @@ struct epgApp: App {
     private let epgService: EpgService = .init()    // FIXME!!!
     private let channelRepository: ChannelRepository = ChannelRepositoryImpl(
         epgService: EpgService(),
-        dataSource: CoreDataChannelDataSource()
+        dataSource: CoreDataDataSource()
     )
 
     var body: some Scene {

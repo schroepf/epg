@@ -1,8 +1,12 @@
 import Foundation
 import CoreData
 
-struct CoreDataChannelDataSource: ChannelDataSource {
-    let container: NSPersistentContainer
+struct CoreDataDataSource {
+    private let container: NSPersistentContainer
+
+    private var context: NSManagedObjectContext {
+        container.viewContext
+    }
 
     init(){
         container = NSPersistentContainer(name: "EpgModel")
@@ -14,6 +18,23 @@ struct CoreDataChannelDataSource: ChannelDataSource {
         }
     }
 
+    private func deleteAllEntities(entityType: NSManagedObject.Type) throws {
+        let fetchRequest: NSFetchRequest<any NSFetchRequestResult> = entityType.fetchRequest()
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        try context.execute(batchDeleteRequest)
+        try saveContext()
+    }
+
+    private func saveContext() throws {
+        guard context.hasChanges else {
+            return
+        }
+
+        try context.save()
+    }
+}
+
+extension CoreDataDataSource: ChannelDataSource {
     func getAll() async throws -> [Channel] {
         let request = ChannelEntity.fetchRequest()
 
@@ -24,7 +45,9 @@ struct CoreDataChannelDataSource: ChannelDataSource {
             }
     }
 
-    func saveAll(channels: [Channel]?) async {
+    func saveAll(channels: [Channel]?) async throws {
+        try deleteAllEntities(entityType: ChannelEntity.self)
+
         channels?.forEach { channel in
             let channelEntity = ChannelEntity(context: container.viewContext)
             channelEntity.id = channel.id
@@ -32,18 +55,17 @@ struct CoreDataChannelDataSource: ChannelDataSource {
             channelEntity.iconUrl = channel.icon?.url
         }
 
-        saveContext()
+        try saveContext()
+    }
+}
+
+extension CoreDataDataSource: EpgDataSource {
+    func saveAll(epgEntries: [EpgEntry]?) async throws {
+        // TODO...
     }
 
-    private func saveContext(){
-        let context = container.viewContext
-        if context.hasChanges {
-            do{
-                try context.save()
-            }catch{
-                fatalError("Error: \(error.localizedDescription)")
-            }
-        }
+    func getEntries(channelId: String) async throws -> [EpgEntry] {
+        return []
     }
 }
 

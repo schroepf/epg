@@ -4,8 +4,8 @@ struct ChannelRepositoryImpl: ChannelRepository {
     let epgService: EpgService
     let dataSource: ChannelDataSource
 
-    func updateChannels(channels: [Channel]?) async {
-        await dataSource.saveAll(channels: channels)
+    func updateChannels(channels: [Channel]?) async throws {
+        try await dataSource.saveAll(channels: channels)
     }
 
     func getAllChannels() async -> Result<[Channel], ChannelError> {

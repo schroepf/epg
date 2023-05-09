@@ -5,7 +5,11 @@ func persistenceMiddleware(epgRepository: ChannelRepository) -> Middleware<AppSt
         switch action {
         case let action as SaveEpgData:
             Task {
-                await epgRepository.updateChannels(channels: action.epg?.channels)
+                do {
+                    try await epgRepository.updateChannels(channels: action.epg?.channels)
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
             }
 
         case _ as LoadChannels:

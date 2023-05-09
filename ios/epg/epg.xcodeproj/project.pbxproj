@@ -30,7 +30,7 @@
 		AE4575FD2A093BA50003E19D /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575FC2A093BA50003E19D /* ChannelCell.swift */; };
 		AE45763F2A094FF60003E19D /* EpgModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE45763D2A094FF60003E19D /* EpgModel.xcdatamodeld */; };
 		AE4576462A0957520003E19D /* ChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576452A0957520003E19D /* ChannelDataSource.swift */; };
-		AE4576482A09581C0003E19D /* CoreDataChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576472A09581C0003E19D /* CoreDataChannelDataSource.swift */; };
+		AE4576482A09581C0003E19D /* CoreDataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576472A09581C0003E19D /* CoreDataDataSource.swift */; };
 		AE45764B2A095D000003E19D /* ChannelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45764A2A095D000003E19D /* ChannelRepository.swift */; };
 		AE45764E2A095DD10003E19D /* ChannelRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45764D2A095DD10003E19D /* ChannelRepositoryImpl.swift */; };
 		AE4576502A0976800003E19D /* PersistenceMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45764F2A0976800003E19D /* PersistenceMiddleware.swift */; };
@@ -46,6 +46,9 @@
 		AE4576672A0A11200003E19D /* ChannelDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4576662A0A11200003E19D /* ChannelDetailsState.swift */; };
 		AE869A352A0A17EE00C5D2C2 /* Result+value.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A342A0A17EE00C5D2C2 /* Result+value.swift */; };
 		AE869A372A0A1A1F00C5D2C2 /* ChannelDetailsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A362A0A1A1F00C5D2C2 /* ChannelDetailsReducer.swift */; };
+		AE869A392A0A29A300C5D2C2 /* EpgRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A382A0A29A200C5D2C2 /* EpgRepository.swift */; };
+		AE869A3B2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A3A2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift */; };
+		AE869A3D2A0A2A8B00C5D2C2 /* EpgDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A3C2A0A2A8B00C5D2C2 /* EpgDataSource.swift */; };
 		AEC281972A0A168D00AC558F /* SetChannelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC281962A0A168D00AC558F /* SetChannelDetails.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +96,7 @@
 		AE4575FC2A093BA50003E19D /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		AE45763E2A094FF60003E19D /* EpgModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EpgModel.xcdatamodel; sourceTree = "<group>"; };
 		AE4576452A0957520003E19D /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
-		AE4576472A09581C0003E19D /* CoreDataChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataChannelDataSource.swift; sourceTree = "<group>"; };
+		AE4576472A09581C0003E19D /* CoreDataDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDataSource.swift; sourceTree = "<group>"; };
 		AE45764A2A095D000003E19D /* ChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepository.swift; sourceTree = "<group>"; };
 		AE45764D2A095DD10003E19D /* ChannelRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepositoryImpl.swift; sourceTree = "<group>"; };
 		AE45764F2A0976800003E19D /* PersistenceMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceMiddleware.swift; sourceTree = "<group>"; };
@@ -109,6 +112,9 @@
 		AE4576662A0A11200003E19D /* ChannelDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDetailsState.swift; sourceTree = "<group>"; };
 		AE869A342A0A17EE00C5D2C2 /* Result+value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+value.swift"; sourceTree = "<group>"; };
 		AE869A362A0A1A1F00C5D2C2 /* ChannelDetailsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDetailsReducer.swift; sourceTree = "<group>"; };
+		AE869A382A0A29A200C5D2C2 /* EpgRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgRepository.swift; sourceTree = "<group>"; };
+		AE869A3A2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgRepositoryImpl.swift; sourceTree = "<group>"; };
+		AE869A3C2A0A2A8B00C5D2C2 /* EpgDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgDataSource.swift; sourceTree = "<group>"; };
 		AEC281962A0A168D00AC558F /* SetChannelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetChannelDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -282,6 +288,7 @@
 				AE4576442A0956F50003E19D /* coredata */,
 				AE4575F92A092EC20003E19D /* web */,
 				AE4576452A0957520003E19D /* ChannelDataSource.swift */,
+				AE869A3C2A0A2A8B00C5D2C2 /* EpgDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -318,7 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				AE45763D2A094FF60003E19D /* EpgModel.xcdatamodeld */,
-				AE4576472A09581C0003E19D /* CoreDataChannelDataSource.swift */,
+				AE4576472A09581C0003E19D /* CoreDataDataSource.swift */,
 			);
 			path = coredata;
 			sourceTree = "<group>";
@@ -327,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				AE45764A2A095D000003E19D /* ChannelRepository.swift */,
+				AE869A382A0A29A200C5D2C2 /* EpgRepository.swift */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -335,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				AE45764D2A095DD10003E19D /* ChannelRepositoryImpl.swift */,
+				AE869A3A2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -516,6 +525,8 @@
 				AE4575F82A092B0B0003E19D /* ChannelsReducer.swift in Sources */,
 				AE4575F22A0921A90003E19D /* EpgEntry.swift in Sources */,
 				AE4575F02A0921880003E19D /* Channel.swift in Sources */,
+				AE869A392A0A29A300C5D2C2 /* EpgRepository.swift in Sources */,
+				AE869A3B2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift in Sources */,
 				AE4575C92A08D6F10003E19D /* Store.swift in Sources */,
 				AE4576462A0957520003E19D /* ChannelDataSource.swift in Sources */,
 				AE45763F2A094FF60003E19D /* EpgModel.xcdatamodeld in Sources */,
@@ -535,10 +546,11 @@
 				AE869A372A0A1A1F00C5D2C2 /* ChannelDetailsReducer.swift in Sources */,
 				AE4576632A0A0D6E0003E19D /* ChannelDetailsView.swift in Sources */,
 				AE4575F62A0929D60003E19D /* EpgMiddleware.swift in Sources */,
-				AE4576482A09581C0003E19D /* CoreDataChannelDataSource.swift in Sources */,
+				AE4576482A09581C0003E19D /* CoreDataDataSource.swift in Sources */,
 				AE45765C2A0985540003E19D /* AppState.swift in Sources */,
 				AE4575F42A0923000003E19D /* Bundle+data.swift in Sources */,
 				AE4576532A0984C40003E19D /* FetchEpgDataFromLocalXmlAsync.swift in Sources */,
+				AE869A3D2A0A2A8B00C5D2C2 /* EpgDataSource.swift in Sources */,
 				AEC281972A0A168D00AC558F /* SetChannelDetails.swift in Sources */,
 				AE45765E2A09856B0003E19D /* ChannelsState.swift in Sources */,
 			);
