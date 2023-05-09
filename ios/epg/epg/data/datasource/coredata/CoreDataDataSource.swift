@@ -21,6 +21,7 @@ struct CoreDataDataSource {
     private func deleteAllEntities(entityType: NSManagedObject.Type) throws {
         let fetchRequest: NSFetchRequest<any NSFetchRequestResult> = entityType.fetchRequest()
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
         try context.execute(batchDeleteRequest)
         try saveContext()
     }
@@ -48,24 +49,45 @@ extension CoreDataDataSource: ChannelDataSource {
     func saveAll(channels: [Channel]?) async throws {
         try deleteAllEntities(entityType: ChannelEntity.self)
 
-        channels?.forEach { channel in
+        try channels?.forEach { channel in
             let channelEntity = ChannelEntity(context: container.viewContext)
+
             channelEntity.id = channel.id
             channelEntity.name = channel.name
             channelEntity.iconUrl = channel.icon?.url
+            
+            try saveContext()
         }
-
-        try saveContext()
     }
 }
 
 extension CoreDataDataSource: EpgDataSource {
     func saveAll(epgEntries: [EpgEntry]?) async throws {
-        // TODO...
+        try deleteAllEntities(entityType: EpgEntryEntity.self)
+
+        try epgEntries?.forEach { epgEntry in
+            let channelEntity = EpgEntryEntity(context: container.viewContext)
+
+            channelEntity.channelId = epgEntry.channelId
+            channelEntity.title = epgEntry.title
+            channelEntity.summary = epgEntry.summary
+            channelEntity.start = epgEntry.start
+            channelEntity.stop = epgEntry.stop
+
+            try saveContext()
+        }
+
     }
 
     func getEntries(channelId: String) async throws -> [EpgEntry] {
-        return []
+        let request = EpgEntryEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "channelId == %@", channelId)
+
+        return try container.viewContext
+            .fetch(request)
+            .compactMap { epgEntity in
+                EpgEntry(entity: epgEntity)
+            }
     }
 }
 
@@ -76,5 +98,15 @@ extension Channel {
         }
 
         self.init(id: id, name: name, icon: entity.iconUrl.map { .init(url: $0) })
+    }
+}
+
+extension EpgEntry {
+    init?(entity: EpgEntryEntity) {
+        guard let channeldId = entity.channelId, let title = entity.title, let start = entity.start, let stop = entity.stop else {
+            return nil
+        }
+
+        self.init(channelId: channeldId, title: title, summary: entity.summary, start: start, stop: stop)
     }
 }

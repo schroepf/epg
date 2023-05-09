@@ -1,10 +1,10 @@
 import Foundation
 
 struct ChannelRepositoryImpl: ChannelRepository {
-    let epgService: EpgService
     let dataSource: ChannelDataSource
 
     func updateChannels(channels: [Channel]?) async throws {
+        print("ChannelRepositoryImpl: updateChannels")
         try await dataSource.saveAll(channels: channels)
     }
 

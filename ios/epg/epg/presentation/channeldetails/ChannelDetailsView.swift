@@ -7,6 +7,7 @@ struct ChannelDetailsView: View {
 
     struct Props {
         let title: String
+        let epgData: [EpgEntry]?
         let logoUrl: URL?
         let onLoadChannelDetails: () -> Void
     }
@@ -14,6 +15,7 @@ struct ChannelDetailsView: View {
     private func map(state: ChannelDetailsState) -> Props {
         Props(
             title: state.channel?.name ?? "No channel found",
+            epgData: state.epgData,
             logoUrl: state.channel?.icon?.url,
             onLoadChannelDetails: {
                 store.dispatch(action: LoadChannelDetails(channelId: channelId))
@@ -28,7 +30,14 @@ struct ChannelDetailsView: View {
                 AsyncImage(url: props.logoUrl)
                 Text(props.title)
             }
+
+            List(props.epgData ?? [], id: \.id) { epg in
+                Text(epg.title)
+
+            }
+            .listStyle(.plain)
         }
+        .navigationTitle(props.title)
         .onAppear {
             props.onLoadChannelDetails()
         }

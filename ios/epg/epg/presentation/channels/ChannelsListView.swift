@@ -51,7 +51,7 @@ struct ChannelsListView: View {
             }
             .listStyle(.plain)
         }
-        .navigationTitle("EPG Data")
+        .navigationTitle("Channels")
         .embedInNavigationView()
     }
 }

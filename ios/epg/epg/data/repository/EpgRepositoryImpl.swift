@@ -1,10 +1,10 @@
 import Foundation
 
 struct EpgRepositoryImpl: EpgRepository {
-    let epgService: EpgService
     let dataSource: EpgDataSource
 
     func updateEpgData(epgEntries: [EpgEntry]?) async throws {
+        print("EpgRepositoryImpl: updateEpgData")
         try await dataSource.saveAll(epgEntries: epgEntries)
     }
 
@@ -17,4 +17,3 @@ struct EpgRepositoryImpl: EpgRepository {
         }
     }
 }
-
