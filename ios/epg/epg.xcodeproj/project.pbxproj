@@ -16,7 +16,6 @@
 		AE4575B62A08D5DE0003E19D /* epgUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575B52A08D5DE0003E19D /* epgUITestsLaunchTests.swift */; };
 		AE4575C92A08D6F10003E19D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575C82A08D6F10003E19D /* Store.swift */; };
 		AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575CD2A08EA3A0003E19D /* AppReducer.swift */; };
-		AE4575D92A08FB5B0003E19D /* LogMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575D82A08FB5B0003E19D /* LogMiddleware.swift */; };
 		AE4575DE2A0904530003E19D /* View+embedInNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575DD2A0904530003E19D /* View+embedInNavigationView.swift */; };
 		AE4575E02A0904B50003E19D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4575DF2A0904B50003E19D /* String+Extensions.swift */; };
 		AE4575E72A0911DD0003E19D /* epg.xml.gz in Resources */ = {isa = PBXBuildFile; fileRef = AE4575E62A0911DD0003E19D /* epg.xml.gz */; };
@@ -75,7 +74,6 @@
 		AE4575B52A08D5DE0003E19D /* epgUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = epgUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		AE4575C82A08D6F10003E19D /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		AE4575CD2A08EA3A0003E19D /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
-		AE4575D82A08FB5B0003E19D /* LogMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMiddleware.swift; sourceTree = "<group>"; };
 		AE4575DD2A0904530003E19D /* View+embedInNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+embedInNavigationView.swift"; sourceTree = "<group>"; };
 		AE4575DF2A0904B50003E19D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		AE4575E62A0911DD0003E19D /* epg.xml.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = epg.xml.gz; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 		AE4575D72A08FB4E0003E19D /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
-				AE4575D82A08FB5B0003E19D /* LogMiddleware.swift */,
 				AE4575F52A0929D60003E19D /* EpgMiddleware.swift */,
 				AE45764F2A0976800003E19D /* PersistenceMiddleware.swift */,
 			);
@@ -506,7 +503,6 @@
 				AE45764B2A095D000003E19D /* ChannelRepository.swift in Sources */,
 				AE4576592A09852B0003E19D /* SaveEpgData.swift in Sources */,
 				AE4576502A0976800003E19D /* PersistenceMiddleware.swift in Sources */,
-				AE4575D92A08FB5B0003E19D /* LogMiddleware.swift in Sources */,
 				AE4575F62A0929D60003E19D /* EpgMiddleware.swift in Sources */,
 				AE4576482A09581C0003E19D /* CoreDataChannelDataSource.swift in Sources */,
 				AE45765C2A0985540003E19D /* AppState.swift in Sources */,

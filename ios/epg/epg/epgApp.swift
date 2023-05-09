@@ -14,7 +14,6 @@ struct epgApp: App {
             reducer: appReducer,
             state: AppState(),
             middlewares: [
-                logMiddleware(),
                 epgMiddleware(epgService: epgService),
                 persistenceMiddleware(epgRepository: channelRepository)
             ]

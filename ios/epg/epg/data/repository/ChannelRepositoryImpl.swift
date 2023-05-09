@@ -11,6 +11,7 @@ struct ChannelRepositoryImpl: ChannelRepository {
     func getAllChannels() async -> Result<[Channel], ChannelError> {
         do {
             let channels = try await dataSource.getAll()
+            print("Channels from DB: \(channels.count)")
             return .success(channels)
         } catch {
             return .failure(.persistenceError)
