@@ -50,6 +50,7 @@
 		AE869A3B2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A3A2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift */; };
 		AE869A3D2A0A2A8B00C5D2C2 /* EpgDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A3C2A0A2A8B00C5D2C2 /* EpgDataSource.swift */; };
 		AE869A412A0A417800C5D2C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A402A0A417800C5D2C2 /* AppDelegate.swift */; };
+		AE869A452A0A504700C5D2C2 /* EpgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A442A0A504700C5D2C2 /* EpgCell.swift */; };
 		AEC281972A0A168D00AC558F /* SetChannelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC281962A0A168D00AC558F /* SetChannelDetails.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		AE869A3A2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgRepositoryImpl.swift; sourceTree = "<group>"; };
 		AE869A3C2A0A2A8B00C5D2C2 /* EpgDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgDataSource.swift; sourceTree = "<group>"; };
 		AE869A402A0A417800C5D2C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AE869A442A0A504700C5D2C2 /* EpgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgCell.swift; sourceTree = "<group>"; };
 		AEC281962A0A168D00AC558F /* SetChannelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetChannelDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				AE4576622A0A0D6E0003E19D /* ChannelDetailsView.swift */,
+				AE869A442A0A504700C5D2C2 /* EpgCell.swift */,
 			);
 			path = channeldetails;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				AE4575F02A0921880003E19D /* Channel.swift in Sources */,
 				AE869A392A0A29A300C5D2C2 /* EpgRepository.swift in Sources */,
 				AE869A3B2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift in Sources */,
+				AE869A452A0A504700C5D2C2 /* EpgCell.swift in Sources */,
 				AE4575C92A08D6F10003E19D /* Store.swift in Sources */,
 				AE4576462A0957520003E19D /* ChannelDataSource.swift in Sources */,
 				AE45763F2A094FF60003E19D /* EpgModel.xcdatamodeld in Sources */,

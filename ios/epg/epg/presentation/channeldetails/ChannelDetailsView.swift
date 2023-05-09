@@ -26,17 +26,14 @@ struct ChannelDetailsView: View {
     var body: some View {
         let props = map(state: store.state.channelDetailsState)
         VStack {
-            HStack {
-                AsyncImage(url: props.logoUrl)
-                Text(props.title)
-            }
+            AsyncImage(url: props.logoUrl)
 
             List(props.epgData ?? [], id: \.id) { epg in
-                Text(epg.title)
-
+                EpgCell(epgEntry: epg)
             }
             .listStyle(.plain)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(props.title)
         .onAppear {
             props.onLoadChannelDetails()

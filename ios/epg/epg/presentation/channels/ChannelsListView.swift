@@ -36,11 +36,6 @@ struct ChannelsListView: View {
                 }
             }
 
-            Button("Load Channels") {
-                props.onLoadChannels()
-            }
-
-
             Spacer()
 
             List(props.channels, id: \.id) { channel in
@@ -50,6 +45,9 @@ struct ChannelsListView: View {
 
             }
             .listStyle(.plain)
+        }
+        .onAppear {
+            props.onLoadChannels()
         }
         .navigationTitle("Channels")
         .embedInNavigationView()
