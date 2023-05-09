@@ -33,7 +33,6 @@ struct ChannelDetailsView: View {
             }
             .listStyle(.plain)
         }
-        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(props.title)
         .onAppear {
             props.onLoadChannelDetails()

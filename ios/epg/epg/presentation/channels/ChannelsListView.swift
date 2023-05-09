@@ -24,20 +24,6 @@ struct ChannelsListView: View {
         let props = map(state: store.state.channelsState)
 
         VStack {
-            Text("Fetch EPG Data")
-
-            HStack {
-                Button("Remote") {
-                    props.onFetchRemoteEpgXml()
-                }
-
-                Button("Local") {
-                    props.onFetchLocalEpgXml()
-                }
-            }
-
-            Spacer()
-
             List(props.channels, id: \.id) { channel in
                 NavigationLink(destination: ChannelDetailsView(channelId: channel.id)) {
                     ChannelCell(channel: channel)
@@ -50,6 +36,31 @@ struct ChannelsListView: View {
             props.onLoadChannels()
         }
         .navigationTitle("Channels")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button {
+                        props.onFetchLocalEpgXml()
+                    } label: {
+                        HStack {
+                            Image(systemName: "iphone.circle")
+                            Text("Import local EPG data")
+                        }
+                    }
+
+                    Button {
+                        props.onFetchRemoteEpgXml()
+                    } label: {
+                        HStack {
+                            Image(systemName: "arrow.clockwise.icloud")
+                            Text("Import remote EPG data")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "gearshape")
+                }
+            }
+        }
         .embedInNavigationView()
     }
 }
