@@ -13,6 +13,15 @@ func persistenceMiddleware(epgRepository: ChannelRepository) -> Middleware<AppSt
                 let channels = await epgRepository.getAllChannels()
                 dispatch(SetChannels(result: channels))
             }
+
+        case let action as LoadChannelDetails:
+            Task {
+                let selectedChannel = await epgRepository.getAllChannels()
+                    .valueOrNil?
+                    .first { $0.id == action.channelId }
+                dispatch(SetChannelDetails(channel: selectedChannel))
+            }
+
         default:
             break
         }
