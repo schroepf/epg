@@ -17,6 +17,8 @@ struct TVWallpaperView: View {
                         Text(focusedChannel?.name ?? "")
                         Spacer()
                     }
+                    .padding([.horizontal], 90)
+                    .padding([.vertical], 60)
                 }
                 .ignoresSafeArea()
             }

@@ -42,20 +42,15 @@ struct TVChannelDetailsView: View {
         let props = map(state: store.state.channelDetailsState)
 
         GeometryReader { geometry in
-            ZStack {
-                TVWallpaperView()
-                .ignoresSafeArea()
-
-                List(props.epgData ?? [], id: \.id) { epg in
-                    Button(epg.title) {
-                        // no-op
-                    }
-                    .focusedValue(\.focusedEpgEntry, epg)
-
+            List(props.epgData ?? [], id: \.id) { epg in
+                Button(epg.title) {
+                    // no-op
                 }
-                .padding([.leading, .trailing], 90)
-                .offset(.init(width: .zero, height: 300))
+                .focusedValue(\.focusedEpgEntry, epg)
+                
             }
+            .padding([.leading, .trailing], 90)
+            .offset(.init(width: .zero, height: 300))
         }
         .task {
             props.onLoadChannelDetails()

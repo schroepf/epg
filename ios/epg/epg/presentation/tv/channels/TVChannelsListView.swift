@@ -40,6 +40,9 @@ struct TVChannelsListView: View {
 
         GeometryReader { geometry in
             ZStack {
+                TVWallpaperView()
+                    .ignoresSafeArea()
+
                 ScrollView(.horizontal) {
                     LazyHStack() {
                         ForEach(props.channels) { channel in
@@ -84,7 +87,6 @@ struct TVChannelsListView: View {
                 }
             }
         }
-        .ignoresSafeArea()
     }
 }
 
