@@ -33,7 +33,8 @@ struct EpgCell_Previews: PreviewProvider {
             title: "Tagesschau",
             summary: "Aktuelle Nachrichten",
             start: Date(),
-            stop: Date()
+            stop: Date(),
+            artwork: nil
         )
         EpgCell(epgEntry: epg)
     }

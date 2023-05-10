@@ -6,7 +6,7 @@ func channelDetailsReducer(state: [String: ChannelDetailsState], action: Action)
         }
 
         var result = state
-        result[channelId] = ChannelDetailsState(channel: action.channel, epgData: action.epgData)
+        result[channelId] = ChannelDetailsState(channel: action.channel, currentEpgEntry: action.currentEpgEntry, epgData: action.epgData)
         return result
     default:
         return state

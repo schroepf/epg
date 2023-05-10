@@ -8,12 +8,11 @@ struct EpgRepositoryImpl: EpgRepository {
         try await dataSource.saveAll(epgEntries: epgEntries)
     }
 
-    func getEpgDataByChannel(channelId: String) async -> Result<[EpgEntry], EpgError> {
-        do {
-            let epgEntries = try await dataSource.getEntries(channelId: channelId)
-            return .success(epgEntries)
-        } catch {
-            return .failure(.persistenceError)
-        }
+    func getEpgDataByChannel(channelId: String) async throws -> [EpgEntry] {
+        return try await dataSource.getEntries(channelId: channelId)
+    }
+
+    func getEpgEntry(channelId: String, at date: Date) async throws -> EpgEntry? {
+        return try await dataSource.getEntry(channelId: channelId, at: date)
     }
 }

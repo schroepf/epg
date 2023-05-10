@@ -31,6 +31,20 @@ extension CoreDataDataSource: ChannelDataSource {
         }
     }
 
+    func getChannel(channelId: String) async throws -> Channel? {
+        return try await viewContext.perform {
+            let request = ChannelEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "id == %@", channelId)
+
+            return try self.viewContext
+                .fetch(request)
+                .compactMap { channelEntity in
+                    Channel(entity: channelEntity)
+                }
+                .first
+        }
+    }
+
     func saveAll(channels: [Channel]?) async throws {
         let context = backgroundContext
         try await context.perform {
@@ -64,6 +78,7 @@ extension CoreDataDataSource: EpgDataSource {
                 channelEntity.summary = epgEntry.summary
                 channelEntity.start = epgEntry.start
                 channelEntity.stop = epgEntry.stop
+                channelEntity.artworkUrl = epgEntry.artwork?.url
 
                 try context.saveIfNeeded()
             }
@@ -80,6 +95,20 @@ extension CoreDataDataSource: EpgDataSource {
                 .compactMap { epgEntity in
                     EpgEntry(entity: epgEntity)
                 }
+        }
+    }
+
+    func getEntry(channelId: String, at date: Date) async throws -> EpgEntry? {
+        return try await viewContext.perform {
+            let request = EpgEntryEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "(channelId == %@) AND (start <= %@) AND (stop >= %@)", channelId, date as CVarArg, date as CVarArg)
+
+            return try self.viewContext
+                .fetch(request)
+                .compactMap { epgEntity in
+                    EpgEntry(entity: epgEntity)
+                }
+                .first
         }
     }
 }
@@ -100,7 +129,14 @@ extension EpgEntry {
             return nil
         }
 
-        self.init(channelId: channeldId, title: title, summary: entity.summary, start: start, stop: stop)
+        self.init(
+            channelId: channeldId,
+            title: title,
+            summary: entity.summary,
+            start: start,
+            stop: stop,
+            artwork: entity.artworkUrl.map { .init(url: $0) }
+        )
     }
 }
 

@@ -1,3 +1,3 @@
 struct SetChannels: Action {
-    let result: Result<[Channel], ChannelError>
+    let result: [Channel]
 }

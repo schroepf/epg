@@ -21,25 +21,22 @@ func persistenceMiddleware(
 
         case _ as LoadChannels:
             Task {
-                let channels = await channelRepository.getAllChannels()
+                let channels = try await channelRepository.getAllChannels()
                 dispatch(SetChannels(result: channels))
             }
 
         case let action as LoadChannelDetails:
             Task {
-                // TODO: Use .getChannel(channelId: String) instead!
-                // TODO: let channelrepository throw errors instead
-                let selectedChannel = await channelRepository.getAllChannels()
-                    .valueOrNil?
-                    .first { $0.id == action.channelId }
+                let selectedChannel = try await channelRepository.getChannel(channelId: action.channelId)
 
                 guard let selectedChannel else {
-                    dispatch(SetChannelDetails(channel: nil, epgData: nil))
+                    dispatch(SetChannelDetails(channel: nil, currentEpgEntry: nil, epgData: nil))
                     return
                 }
                 
-                let epgData = await epgRepository.getEpgDataByChannel(channelId: selectedChannel.id)
-                dispatch(SetChannelDetails(channel: selectedChannel, epgData: epgData.valueOrNil))
+                let epgData = try await epgRepository.getEpgDataByChannel(channelId: selectedChannel.id)
+                let currentEpgEntry = try await epgRepository.getEpgEntry(channelId: selectedChannel.id, at: Date())
+                dispatch(SetChannelDetails(channel: selectedChannel, currentEpgEntry: currentEpgEntry, epgData: epgData))
             }
 
         default:

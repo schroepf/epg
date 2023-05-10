@@ -7,6 +7,7 @@ struct EpgEntry: Decodable, Identifiable {
     let summary: String?
     let start: Date
     let stop: Date
+    let artwork: Icon?
 
     enum CodingKeys: String, CodingKey {
         case channelId = "channel"
@@ -14,5 +15,6 @@ struct EpgEntry: Decodable, Identifiable {
         case summary = "desc"
         case start
         case stop
+        case artwork = "icon"
     }
 }

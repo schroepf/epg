@@ -53,6 +53,7 @@
 		AE869A452A0A504700C5D2C2 /* EpgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A442A0A504700C5D2C2 /* EpgCell.swift */; };
 		AE869A4A2A0A6B8300C5D2C2 /* TVChannelsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A492A0A6B8300C5D2C2 /* TVChannelsListView.swift */; };
 		AE869A882A0A759C00C5D2C2 /* TVChannelDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A872A0A759C00C5D2C2 /* TVChannelDetailsView.swift */; };
+		AE869A8A2A0B64DF00C5D2C2 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A892A0B64DF00C5D2C2 /* Icon.swift */; };
 		AEC281972A0A168D00AC558F /* SetChannelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC281962A0A168D00AC558F /* SetChannelDetails.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		AE869A442A0A504700C5D2C2 /* EpgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgCell.swift; sourceTree = "<group>"; };
 		AE869A492A0A6B8300C5D2C2 /* TVChannelsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChannelsListView.swift; sourceTree = "<group>"; };
 		AE869A872A0A759C00C5D2C2 /* TVChannelDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChannelDetailsView.swift; sourceTree = "<group>"; };
+		AE869A892A0B64DF00C5D2C2 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		AEC281962A0A168D00AC558F /* SetChannelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetChannelDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -279,6 +281,7 @@
 				AE4575ED2A0921510003E19D /* Epg.swift */,
 				AE4575F12A0921A90003E19D /* EpgEntry.swift */,
 				AE4575EF2A0921880003E19D /* Channel.swift */,
+				AE869A892A0B64DF00C5D2C2 /* Icon.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				AE4575DE2A0904530003E19D /* View+embedInNavigationView.swift in Sources */,
 				AE4576652A0A104E0003E19D /* LoadChannelDetails.swift in Sources */,
 				AE4576602A09864B0003E19D /* SetChannels.swift in Sources */,
+				AE869A8A2A0B64DF00C5D2C2 /* Icon.swift in Sources */,
 				AE4575CE2A08EA3A0003E19D /* AppReducer.swift in Sources */,
 				AE869A4A2A0A6B8300C5D2C2 /* TVChannelsListView.swift in Sources */,
 				AE45764B2A095D000003E19D /* ChannelRepository.swift in Sources */,

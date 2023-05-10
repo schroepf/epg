@@ -8,13 +8,13 @@ struct ChannelRepositoryImpl: ChannelRepository {
         try await dataSource.saveAll(channels: channels)
     }
 
-    func getAllChannels() async -> Result<[Channel], ChannelError> {
-        do {
-            let channels = try await dataSource.getAll()
-            print("Channels from DB: \(channels.count)")
-            return .success(channels)
-        } catch {
-            return .failure(.persistenceError)
-        }
+    func getAllChannels() async throws -> [Channel] {
+        let channels = try await dataSource.getAll()
+        print("Channels from DB: \(channels.count)")
+        return channels
+    }
+
+    func getChannel(channelId: String) async throws -> Channel? {
+        return try await dataSource.getChannel(channelId: channelId)
     }
 }

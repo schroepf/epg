@@ -5,19 +5,22 @@ struct TVChannelDetailsView: View {
 
     let channelId: String
 
-    struct Props {
+    struct ViewState {
         let title: String
+        let currentArtwork: Icon?
         let epgData: [EpgEntry]?
-        let logoUrl: URL?
+        let channelLogo: Icon?
         let onLoadChannelDetails: () -> Void
     }
 
-    private func map(state: [String: ChannelDetailsState]) -> Props {
+    private func map(state: [String: ChannelDetailsState]) -> ViewState {
         let channelDetails = state[channelId]
-        return Props(
-            title: channelId,
+
+        return TVChannelDetailsView.ViewState(
+            title: channelDetails?.channel?.name ?? channelId,
+            currentArtwork: channelDetails?.currentEpgEntry?.artwork,
             epgData: channelDetails?.epgData,
-            logoUrl: channelDetails?.channel?.icon?.url,
+            channelLogo: channelDetails?.channel?.icon,
             onLoadChannelDetails: {
                 store.dispatch(action: LoadChannelDetails(channelId: channelId))
             }
@@ -27,11 +30,28 @@ struct TVChannelDetailsView: View {
     var body: some View {
         let props = map(state: store.state.channelDetailsState)
 
-        VStack {
-            Text(props.title)
+        GeometryReader { geometry in
+            ZStack {
+                ZStack(alignment: .topLeading) {
+                    AsyncImage(url: props.currentArtwork?.forSize(size: geometry.size))
 
-            List(props.epgData ?? [], id: \.id) { epg in
-                Text(epg.title)
+                    HStack(alignment: .top) {
+                        ChannelIcon(icon: props.channelLogo)
+                            .frame(maxWidth: 100, maxHeight: 100)
+                        Spacer()
+                        Text(props.title)
+                    }
+                }
+
+
+                VStack {
+                    List(props.epgData ?? [], id: \.id) { epg in
+                        Button(epg.title) {
+                            // no-op
+                        }
+                    }
+                }
+                .padding([.top])
             }
         }
         .focusable()
@@ -44,5 +64,15 @@ struct TVChannelDetailsView: View {
 struct TVChannelDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         TVChannelDetailsView(channelId: "BYde")
+    }
+}
+
+extension Icon {
+    func forSize(size: CGSize) -> URL? {
+        if (url.host() == "image.fzdigital.de") {
+            return URL(string: "https://image.fzdigital.de/\(Int(size.width))x\(Int(size.height))/\(url.lastPathComponent)")
+        }
+
+        return url
     }
 }
