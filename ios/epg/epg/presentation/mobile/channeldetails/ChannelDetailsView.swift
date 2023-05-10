@@ -12,11 +12,12 @@ struct ChannelDetailsView: View {
         let onLoadChannelDetails: () -> Void
     }
 
-    private func map(state: ChannelDetailsState) -> Props {
-        Props(
-            title: state.channel?.name ?? "No channel found",
-            epgData: state.epgData,
-            logoUrl: state.channel?.icon?.url,
+    private func map(state: [String: ChannelDetailsState]) -> Props {
+        let channelDetails = state[channelId]
+        return Props(
+            title: channelDetails?.channel?.name ?? "No channel found",
+            epgData: channelDetails?.epgData,
+            logoUrl: channelDetails?.channel?.icon?.url,
             onLoadChannelDetails: {
                 store.dispatch(action: LoadChannelDetails(channelId: channelId))
             }

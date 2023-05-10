@@ -12,11 +12,12 @@ struct TVChannelDetailsView: View {
         let onLoadChannelDetails: () -> Void
     }
 
-    private func map(state: ChannelDetailsState) -> Props {
-        Props(
+    private func map(state: [String: ChannelDetailsState]) -> Props {
+        let channelDetails = state[channelId]
+        return Props(
             title: channelId,
-            epgData: state.epgData,
-            logoUrl: state.channel?.icon?.url,
+            epgData: channelDetails?.epgData,
+            logoUrl: channelDetails?.channel?.icon?.url,
             onLoadChannelDetails: {
                 store.dispatch(action: LoadChannelDetails(channelId: channelId))
             }
@@ -28,6 +29,10 @@ struct TVChannelDetailsView: View {
 
         VStack {
             Text(props.title)
+
+            List(props.epgData ?? [], id: \.id) { epg in
+                Text(epg.title)
+            }
         }
         .focusable()
         .task {

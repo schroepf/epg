@@ -1,7 +1,13 @@
-func channelDetailsReducer(state: ChannelDetailsState, action: Action) -> ChannelDetailsState {
+func channelDetailsReducer(state: [String: ChannelDetailsState], action: Action) -> [String: ChannelDetailsState] {
     switch action {
     case let action as SetChannelDetails:
-        return ChannelDetailsState(channel: action.channel, epgData: action.epgData)
+        guard let channelId = action.channel?.id else {
+            return state
+        }
+
+        var result = state
+        result[channelId] = ChannelDetailsState(channel: action.channel, epgData: action.epgData)
+        return result
     default:
         return state
     }

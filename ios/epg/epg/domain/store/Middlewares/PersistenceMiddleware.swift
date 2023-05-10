@@ -27,6 +27,8 @@ func persistenceMiddleware(
 
         case let action as LoadChannelDetails:
             Task {
+                // TODO: Use .getChannel(channelId: String) instead!
+                // TODO: let channelrepository throw errors instead
                 let selectedChannel = await channelRepository.getAllChannels()
                     .valueOrNil?
                     .first { $0.id == action.channelId }
