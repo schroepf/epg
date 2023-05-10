@@ -1,5 +1,16 @@
 import SwiftUI
 
+struct FocusedChannel: FocusedValueKey {
+    typealias Value = Channel
+}
+
+extension FocusedValues {
+    var focusedChannel: FocusedChannel.Value? {
+        get { self[FocusedChannel.self] }
+        set { self[FocusedChannel.self] = newValue }
+    }
+}
+
 struct TVChannelsListView: View {
     @EnvironmentObject var store: Store<AppState>
     @FocusState var isSettingsFocused: Bool
@@ -34,6 +45,7 @@ struct TVChannelsListView: View {
                         ForEach(props.channels) { channel in
                             TVChannelDetailsView(channelId: channel.id)
                                 .frame(width: geometry.size.width)
+                                .focusedValue(\.focusedChannel, channel)
                         }
                     }
                 }
@@ -72,6 +84,7 @@ struct TVChannelsListView: View {
                 }
             }
         }
+        .ignoresSafeArea()
     }
 }
 

@@ -1,5 +1,16 @@
 import SwiftUI
 
+struct FocusedEpgEntry: FocusedValueKey {
+    typealias Value = EpgEntry
+}
+
+extension FocusedValues {
+    var focusedEpgEntry: FocusedEpgEntry.Value? {
+        get { self[FocusedEpgEntry.self] }
+        set { self[FocusedEpgEntry.self] = newValue }
+    }
+}
+
 struct TVChannelDetailsView: View {
     @EnvironmentObject var store: Store<AppState>
 
@@ -32,26 +43,18 @@ struct TVChannelDetailsView: View {
 
         GeometryReader { geometry in
             ZStack {
-                ZStack(alignment: .topLeading) {
-                    AsyncImage(url: props.currentArtwork?.forSize(size: geometry.size))
+                TVWallpaperView()
+                .ignoresSafeArea()
 
-                    HStack(alignment: .center) {
-                        ChannelIcon(icon: props.channelLogo)
-                            .frame(maxWidth: 100, maxHeight: 100)
-                        Spacer()
-                        Text(props.title)
-                        Spacer()
+                List(props.epgData ?? [], id: \.id) { epg in
+                    Button(epg.title) {
+                        // no-op
                     }
-                }
+                    .focusedValue(\.focusedEpgEntry, epg)
 
-                VStack {
-                    List(props.epgData ?? [], id: \.id) { epg in
-                        Button(epg.title) {
-                            // no-op
-                        }
-                    }
                 }
-                .padding([.top], 300)
+                .padding([.leading, .trailing], 90)
+                .offset(.init(width: .zero, height: 300))
             }
         }
         .task {
