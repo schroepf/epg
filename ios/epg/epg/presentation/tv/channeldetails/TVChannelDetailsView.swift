@@ -35,14 +35,14 @@ struct TVChannelDetailsView: View {
                 ZStack(alignment: .topLeading) {
                     AsyncImage(url: props.currentArtwork?.forSize(size: geometry.size))
 
-                    HStack(alignment: .top) {
+                    HStack(alignment: .center) {
                         ChannelIcon(icon: props.channelLogo)
                             .frame(maxWidth: 100, maxHeight: 100)
                         Spacer()
                         Text(props.title)
+                        Spacer()
                     }
                 }
-
 
                 VStack {
                     List(props.epgData ?? [], id: \.id) { epg in
@@ -51,10 +51,9 @@ struct TVChannelDetailsView: View {
                         }
                     }
                 }
-                .padding([.top])
+                .padding([.top], 300)
             }
         }
-        .focusable()
         .task {
             props.onLoadChannelDetails()
         }

@@ -75,6 +75,12 @@
             ReferencedContainer = "container:epg.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-UIFocusLoggingEnabled YES"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "com.apple.CoreData.ConcurrencyDebug"

@@ -32,9 +32,6 @@ struct ChannelsListView: View {
             }
             .listStyle(.plain)
         }
-        .task {
-            props.onLoadChannels()
-        }
         .navigationTitle("Channels")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

@@ -2,31 +2,37 @@ import SwiftUI
 
 @main
 struct epgApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    enum Dependencies {
+        static let epgService: EpgService = .init()
+        static let coreDataDataSource = CoreDataDataSource()
+    }
 
-    private let epgService: EpgService = .init()
-    private let coreDataDataSource = CoreDataDataSource()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) var scenePhase
+    @StateObject var store = Store(
+        reducer: appReducer,
+        state: AppState(),
+        middlewares: [
+            epgMiddleware(epgService: Dependencies.epgService),
+            persistenceMiddleware(
+                channelRepository: ChannelRepositoryImpl(dataSource: Dependencies.coreDataDataSource),
+                epgRepository: EpgRepositoryImpl(dataSource: Dependencies.coreDataDataSource)
+            )
+        ]
+    )
 
     var body: some Scene {
-
-        let store = Store(
-            reducer: appReducer,
-            state: AppState(),
-            middlewares: [
-                epgMiddleware(epgService: epgService),
-                persistenceMiddleware(
-                    channelRepository: ChannelRepositoryImpl(dataSource: coreDataDataSource),
-                    epgRepository: EpgRepositoryImpl(dataSource: coreDataDataSource)
-                )
-            ]
-        )
-
         WindowGroup {
             #if os(iOS)
             ChannelsListView().environmentObject(store)
             #elseif os(tvOS)
             TVChannelsListView().environmentObject(store)
             #endif
+        }
+        .onChange(of: scenePhase) { newScenePhase in
+            if newScenePhase == .active {
+                store.dispatch(action: LoadChannels())
+            }
         }
     }
 }
