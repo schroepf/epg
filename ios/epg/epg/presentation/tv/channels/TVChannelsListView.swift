@@ -13,10 +13,6 @@ extension FocusedValues {
 
 struct TVChannelsListView: View {
     @EnvironmentObject var store: Store<AppDomain.State>
-    @FocusState var isSettingsFocused: Bool
-    @State var settingsVisible: Bool = false
-
-    @Namespace private var settings
 
     // hold properties of the view
     struct ViewState {
@@ -41,7 +37,6 @@ struct TVChannelsListView: View {
         GeometryReader { geometry in
             ZStack {
                 TVWallpaperView()
-                    .ignoresSafeArea()
 
                 ScrollView(.horizontal) {
                     LazyHStack() {
@@ -54,36 +49,12 @@ struct TVChannelsListView: View {
                 }
                 .tabViewStyle(.page)
 
-                HStack {
-                    Spacer()
-
-                    VStack {
-                        ZStack(alignment: .topTrailing) {
-                            Button {
-                                settingsVisible.toggle()
-                            } label: {
-                                Image(systemName: "gearshape")
-                            }
-                            .clipShape(Circle())
-                        }
-
-                        Spacer()
-                    }
-                }
-
-                if (settingsVisible) {
-                    TVSettingsView {
-                        viewState.onLoadChannels()
-                        settingsVisible = false
-                    } onImportLocalXml: {
-                        viewState.onFetchLocalEpgXml()
-                        settingsVisible = false
-                    } onImportRemoteXml: {
-                        viewState.onFetchRemoteEpgXml()
-                        settingsVisible = false
-                    } onExit: {
-                        settingsVisible = false
-                    }
+                TVSettingsView {
+                    viewState.onLoadChannels()
+                } onImportLocalXml: {
+                    viewState.onFetchLocalEpgXml()
+                } onImportRemoteXml: {
+                    viewState.onFetchRemoteEpgXml()
                 }
             }
         }

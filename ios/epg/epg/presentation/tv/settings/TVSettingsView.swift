@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct TVSettingsView: View {
+    @State var settingsVisible: Bool = false
+
     let onLoadContentFromDb: () -> Void
     let onImportLocalXml: () -> Void
     let onImportRemoteXml: () -> Void
-    let onExit: () -> Void
 
     enum Setting: Hashable {
         case updateUiFromDb
@@ -19,41 +20,58 @@ struct TVSettingsView: View {
         HStack {
             Spacer()
 
-            VStack {
+            ZStack(alignment: .topTrailing) {
+
                 VStack {
-                    Text("Settings")
-                    List {
-                        Button("Load from DB") {
-                            onLoadContentFromDb()
+                        Button {
+                            settingsVisible.toggle()
+                        } label: {
+                            Image(systemName: "gearshape")
                         }
-                        .focused($focusedSetting, equals: .updateUiFromDb)
+                        .clipShape(Circle())
 
-                        Button("Fetch from Local XML") {
-                            onImportLocalXml()
-                        }
-                        .focused($focusedSetting, equals: .importLocalXml)
-
-                        Button("Fetch from Remote XML") {
-                            onImportRemoteXml()
-                        }
-                        .focused($focusedSetting, equals: .importRemoteXml)
-                    }
-                    .padding([.leading, .trailing])
-                    .frame(maxWidth: 600)
-                    .listStyle(.grouped)
-                    .task {
-                        focusedSetting = .updateUiFromDb
-                    }
+                    Spacer()
                 }
 
-                Spacer()
+                if (settingsVisible) {
+                    VStack {
+                            Text("Settings")
+                            List {
+                                Button("Load from DB") {
+                                    onLoadContentFromDb()
+                                    settingsVisible = false
+                                }
+                                .focused($focusedSetting, equals: .updateUiFromDb)
+
+                                Button("Fetch from Local XML") {
+                                    onImportLocalXml()
+                                    settingsVisible = false
+                                }
+                                .focused($focusedSetting, equals: .importLocalXml)
+
+                                Button("Fetch from Remote XML") {
+                                    onImportRemoteXml()
+                                    settingsVisible = false
+                                }
+                                .focused($focusedSetting, equals: .importRemoteXml)
+                            }
+                            .padding([.leading, .trailing])
+                            .frame(maxWidth: 600)
+                            .listStyle(.grouped)
+                            .task {
+                                focusedSetting = .updateUiFromDb
+                            }
+
+                        Spacer()
+                    }
+                    .background(.ultraThinMaterial)
+                    .focusSection()
+                    .onExitCommand {
+                        // when "MENU" button is pressed
+                        settingsVisible = false
+                    }
+                }
             }
-            .background(.ultraThinMaterial)
-        }
-        .focusSection()
-        .onExitCommand {
-            // when "MENU" button is pressed
-            onExit()
         }
     }
 }

@@ -27,9 +27,9 @@ struct TVWallpaperView: View {
                     .padding([.horizontal], 90)
                     .padding([.vertical], 60)
                 }
-                .ignoresSafeArea()
             }
         }
+        .ignoresSafeArea()
     }
 }
 

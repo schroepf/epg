@@ -43,13 +43,19 @@ struct TVChannelDetailsView: View {
 
         GeometryReader { geometry in
             List(props.epgData ?? [], id: \.id) { epg in
-                Button(epg.title) {
+                Button {
                     // no-op
+                } label: {
+                    VStack {
+                        HStack {
+                            Text(epg.title)
+                            Spacer()
+                            Text(epg.formatStartEndTimeString())
+                        }
+                    }
                 }
                 .focusedValue(\.focusedEpgEntry, epg)
-                
             }
-            .padding([.leading, .trailing], 90)
             .offset(.init(width: .zero, height: 300))
         }
         .task {
@@ -63,4 +69,3 @@ struct TVChannelDetailsView_Previews: PreviewProvider {
         TVChannelDetailsView(channelId: "BYde")
     }
 }
-
