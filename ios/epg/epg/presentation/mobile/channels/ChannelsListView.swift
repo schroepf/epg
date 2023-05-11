@@ -4,15 +4,15 @@ struct ChannelsListView: View {
     @EnvironmentObject var store: Store<AppDomain.State>
 
     // hold properties of the view
-    struct Props {
-        let channels: [Channel]
+    struct ViewState {
+        let channels: [ChannelItem]
         let onFetchRemoteEpgXml: () -> Void
         let onFetchLocalEpgXml: () -> Void
         let onLoadChannels: () -> Void
     }
 
-    private func map(state: ChannelsDomain.State) -> Props {
-        Props(
+    private func map(state: ChannelsDomain.State) -> ViewState {
+        ViewState(
             channels: state.channels ?? [],
             onFetchRemoteEpgXml: { store.dispatch(action: AppDomain.Action.fetchEpgDataFromRemoteXmlAsync(url: "https://elres.de/epg")) },
             onFetchLocalEpgXml: { store.dispatch(action: AppDomain.Action.fetchEpgDataFromLocalXml) },
@@ -21,10 +21,10 @@ struct ChannelsListView: View {
     }
 
     var body: some View {
-        let props = map(state: store.state.channelsState)
+        let viewState = map(state: store.state.channelsState)
 
         VStack {
-            List(props.channels, id: \.id) { channel in
+            List(viewState.channels.map { $0.channel }, id: \.id) { channel in
                 NavigationLink(destination: ChannelDetailsView(channelId: channel.id)) {
                     ChannelCell(channel: channel)
                 }

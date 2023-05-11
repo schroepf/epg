@@ -3,13 +3,13 @@ import SwiftUI
 
 struct TVWallpaperView: View {
     @FocusedValue(\.focusedEpgEntry) var focusedEpgEntry
-    @FocusedValue(\.focusedChannel) var focusedChannel
+    @FocusedValue(\.focusedChannel) var focusedChannelItem
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 ZStack(alignment: .topLeading) {
-                    LazyImage(url: focusedEpgEntry?.artwork?.forSize(size: geometry.size), transaction: Transaction(animation: .default)) { state in
+                    LazyImage(url: focusedChannelItem?.currentEpg?.artwork?.forSize(size: geometry.size), transaction: Transaction(animation: .default)) { state in
                         if let image = state.image {
                             image
                         } else if state.error != nil {
@@ -18,10 +18,10 @@ struct TVWallpaperView: View {
                     }
 
                     HStack(alignment: .center) {
-                        ChannelIcon(icon: focusedChannel?.icon)
+                        ChannelIcon(icon: focusedChannelItem?.channel.icon)
                             .frame(maxWidth: 100, maxHeight: 100)
                         Spacer()
-                        Text(focusedChannel?.name ?? "")
+                        Text(focusedChannelItem?.channel.name ?? "")
                         Spacer()
                     }
                     .padding([.horizontal], 90)

@@ -21,7 +21,17 @@ func persistenceMiddleware(
         case ChannelsDomain.Action.fetchAllChannels:
             Task {
                 let channels = try await channelRepository.getAllChannels()
-                dispatch(ChannelsDomain.Action.setChannels(channels: channels))
+                let mappedChannels = await withTaskGroup(of: ChannelItem.self) { group in
+                    channels.forEach { channel in
+                        group.addTask {
+                            let epg = try? await epgRepository.getEpgEntry(channelId: channel.id, at: Date.now)
+                            return ChannelItem(id: channel.id, channel: channel, currentEpg: epg)
+                        }
+                    }
+
+                    return await group.reduce(into: [ChannelItem]()) { result, item in result += [item] }
+                }
+                dispatch(ChannelsDomain.Action.setChannels(channels: mappedChannels))
             }
 
         case let ChannelDetailsDomain.Action.fetchChannelDetails(channelId):
