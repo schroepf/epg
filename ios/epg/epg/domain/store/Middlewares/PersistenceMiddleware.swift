@@ -3,13 +3,12 @@ import Foundation
 func persistenceMiddleware(
     channelRepository: ChannelRepository,
     epgRepository: EpgRepository
-) -> Middleware<AppState> {
+) -> Middleware<AppDomain.State> {
     return { state, action, dispatch in
         switch action {
-        case let action as SaveEpgData:
+        case let AppDomain.Action.saveEpgData(epg):
             Task {
                 do {
-                    let epg = action.epg
                     try await channelRepository.updateChannels(channels: epg?.channels)
                     print("Channels saved to DB: \(epg?.channels.count ?? 0)")
                     try await epgRepository.updateEpgData(epgEntries: epg?.epgEntries)
@@ -19,24 +18,24 @@ func persistenceMiddleware(
                 }
             }
 
-        case _ as LoadChannels:
+        case ChannelsDomain.Action.fetchAllChannels:
             Task {
                 let channels = try await channelRepository.getAllChannels()
-                dispatch(SetChannels(result: channels))
+                dispatch(ChannelsDomain.Action.setChannels(channels: channels))
             }
 
-        case let action as LoadChannelDetails:
+        case let ChannelDetailsDomain.Action.fetchChannelDetails(channelId):
             Task {
-                let selectedChannel = try await channelRepository.getChannel(channelId: action.channelId)
+                let selectedChannel = try await channelRepository.getChannel(channelId: channelId)
 
                 guard let selectedChannel else {
-                    dispatch(SetChannelDetails(channel: nil, currentEpgEntry: nil, epgData: nil))
+                    dispatch(ChannelDetailsDomain.Action.setChannelDetails(channel: nil, currentEpgEntry: nil, epgData: nil))
                     return
                 }
                 
                 let epgData = try await epgRepository.getEpgDataByChannel(channelId: selectedChannel.id)
                 let currentEpgEntry = try await epgRepository.getEpgEntry(channelId: selectedChannel.id, at: Date())
-                dispatch(SetChannelDetails(channel: selectedChannel, currentEpgEntry: currentEpgEntry, epgData: epgData))
+                dispatch(ChannelDetailsDomain.Action.setChannelDetails(channel: selectedChannel, currentEpgEntry: currentEpgEntry, epgData: epgData))
             }
 
         default:
@@ -44,4 +43,3 @@ func persistenceMiddleware(
         }
     }
 }
-

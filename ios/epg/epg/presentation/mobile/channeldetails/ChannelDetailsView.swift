@@ -1,7 +1,8 @@
+import NukeUI
 import SwiftUI
 
 struct ChannelDetailsView: View {
-    @EnvironmentObject var store: Store<AppState>
+    @EnvironmentObject var store: Store<AppDomain.State>
 
     let channelId: String
 
@@ -12,14 +13,14 @@ struct ChannelDetailsView: View {
         let onLoadChannelDetails: () -> Void
     }
 
-    private func map(state: [String: ChannelDetailsState]) -> Props {
+    private func map(state: [String: ChannelDetailsDomain.State]) -> Props {
         let channelDetails = state[channelId]
         return Props(
             title: channelDetails?.channel?.name ?? "No channel found",
             epgData: channelDetails?.epgData,
             logoUrl: channelDetails?.channel?.icon?.url,
             onLoadChannelDetails: {
-                store.dispatch(action: LoadChannelDetails(channelId: channelId))
+                store.dispatch(action: ChannelDetailsDomain.Action.fetchChannelDetails(channelId: channelId))
             }
         )
     }
@@ -27,7 +28,7 @@ struct ChannelDetailsView: View {
     var body: some View {
         let props = map(state: store.state.channelDetailsState)
         VStack {
-            AsyncImage(url: props.logoUrl)
+            LazyImage(url: props.logoUrl)
 
             List(props.epgData ?? [], id: \.id) { epg in
                 EpgCell(epgEntry: epg)
@@ -44,8 +45,8 @@ struct ChannelDetailsView: View {
 struct ChannelDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let store = Store(
-            reducer: appReducer,
-            state: AppState(),
+            reducer: reducer,
+            state: AppDomain.State(),
             middlewares: [epgMiddleware(epgService: EpgService())]
         )
 

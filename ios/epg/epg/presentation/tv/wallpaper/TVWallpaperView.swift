@@ -1,3 +1,4 @@
+import NukeUI
 import SwiftUI
 
 struct TVWallpaperView: View {
@@ -8,7 +9,13 @@ struct TVWallpaperView: View {
         GeometryReader { geometry in
             ZStack {
                 ZStack(alignment: .topLeading) {
-                    AsyncImage(url: focusedEpgEntry?.artwork?.forSize(size: geometry.size))
+                    LazyImage(url: focusedEpgEntry?.artwork?.forSize(size: geometry.size), transaction: Transaction(animation: .default)) { state in
+                        if let image = state.image {
+                            image
+                        } else if state.error != nil {
+                            AsyncImage(url: .fallbackImageUrl(size: geometry.size))
+                        }
+                    }
 
                     HStack(alignment: .center) {
                         ChannelIcon(icon: focusedChannel?.icon)

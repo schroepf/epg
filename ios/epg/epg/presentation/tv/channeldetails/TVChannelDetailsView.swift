@@ -12,7 +12,7 @@ extension FocusedValues {
 }
 
 struct TVChannelDetailsView: View {
-    @EnvironmentObject var store: Store<AppState>
+    @EnvironmentObject var store: Store<AppDomain.State>
 
     let channelId: String
 
@@ -24,7 +24,7 @@ struct TVChannelDetailsView: View {
         let onLoadChannelDetails: () -> Void
     }
 
-    private func map(state: [String: ChannelDetailsState]) -> ViewState {
+    private func map(state: [String: ChannelDetailsDomain.State]) -> ViewState {
         let channelDetails = state[channelId]
 
         return TVChannelDetailsView.ViewState(
@@ -33,7 +33,7 @@ struct TVChannelDetailsView: View {
             epgData: channelDetails?.epgData,
             channelLogo: channelDetails?.channel?.icon,
             onLoadChannelDetails: {
-                store.dispatch(action: LoadChannelDetails(channelId: channelId))
+                store.dispatch(action: ChannelDetailsDomain.Action.fetchChannelDetails(channelId: channelId))
             }
         )
     }
@@ -64,12 +64,3 @@ struct TVChannelDetailsView_Previews: PreviewProvider {
     }
 }
 
-extension Icon {
-    func forSize(size: CGSize) -> URL? {
-        if (url.host() == "image.fzdigital.de") {
-            return URL(string: "https://image.fzdigital.de/\(Int(size.width))x\(Int(size.height))/\(url.lastPathComponent)")
-        }
-
-        return url
-    }
-}

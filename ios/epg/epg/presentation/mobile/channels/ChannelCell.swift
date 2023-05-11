@@ -1,4 +1,5 @@
 import SwiftUI
+import NukeUI
 
 struct ChannelCell: View {
     let channel: Channel
@@ -16,17 +17,15 @@ struct ChannelIcon: View {
     let icon: Icon?
 
     var body: some View {
-        AsyncImage(url: icon?.url) { phase in
-            switch phase {
-            case .empty:
-                Image(systemName: "tv.fill")
-            case .success(let image):
-                image.resizable()
-                    .aspectRatio(contentMode: .fit)
-            case .failure:
+        LazyImage(url: icon?.url) { state in
+            if let image = state.image {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else if state.error != nil {
                 Image(systemName: "xmark.icloud.fill")
-            @unknown default:
-                EmptyView()
+            } else {
+                Image(systemName: "tv.fill")
             }
         }
     }

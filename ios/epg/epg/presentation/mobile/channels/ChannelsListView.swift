@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ChannelsListView: View {
-    @EnvironmentObject var store: Store<AppState>
+    @EnvironmentObject var store: Store<AppDomain.State>
 
     // hold properties of the view
     struct Props {
@@ -11,12 +11,12 @@ struct ChannelsListView: View {
         let onLoadChannels: () -> Void
     }
 
-    private func map(state: ChannelsState) -> Props {
+    private func map(state: ChannelsDomain.State) -> Props {
         Props(
             channels: state.channels ?? [],
-            onFetchRemoteEpgXml: { store.dispatch(action: FetchEpgDataFromRemoteXmlAsync(url: "https://elres.de/epg")) },
-            onFetchLocalEpgXml: { store.dispatch(action: FetchEpgDataFromLocalXmlAsync() ) },
-            onLoadChannels: { store.dispatch(action: LoadChannels()) }
+            onFetchRemoteEpgXml: { store.dispatch(action: AppDomain.Action.fetchEpgDataFromRemoteXmlAsync(url: "https://elres.de/epg")) },
+            onFetchLocalEpgXml: { store.dispatch(action: AppDomain.Action.fetchEpgDataFromLocalXml) },
+            onLoadChannels: { store.dispatch(action: ChannelsDomain.Action.fetchAllChannels) }
         )
     }
 
@@ -68,8 +68,8 @@ struct ChannelsListView_Previews: PreviewProvider {
     static var previews: some View {
 
         let store = Store(
-            reducer: appReducer,
-            state: AppState(),
+            reducer: reducer,
+            state: AppDomain.State(),
             middlewares: [epgMiddleware(epgService: EpgService())]
         )
 

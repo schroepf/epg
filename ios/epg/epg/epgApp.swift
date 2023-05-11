@@ -10,8 +10,8 @@ struct epgApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
     @StateObject var store = Store(
-        reducer: appReducer,
-        state: AppState(),
+        reducer: reducer,
+        state: AppDomain.State(),
         middlewares: [
             epgMiddleware(epgService: Dependencies.epgService),
             persistenceMiddleware(
@@ -31,7 +31,7 @@ struct epgApp: App {
         }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
-                store.dispatch(action: LoadChannels())
+                store.dispatch(action: ChannelsDomain.Action.fetchAllChannels)
             }
         }
     }
