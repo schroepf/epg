@@ -1,6 +1,6 @@
 import Foundation
 
-struct Icon: Codable {
+struct Icon: Hashable, Codable {
     let url: URL
 
     enum CodingKeys: String, CodingKey {

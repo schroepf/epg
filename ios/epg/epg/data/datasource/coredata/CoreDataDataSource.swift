@@ -26,18 +26,20 @@ extension CoreDataDataSource: ChannelDataSource {
                 .init(SortDescriptor(\ChannelEntity.sortOrder, order: .forward))
             ]
 
-            let channels = try self.viewContext
+            let channelEntities = try self.viewContext
                 .fetch(request)
-                .compactMap { channelEntity in
-                    Channel(entity: channelEntity)
+
+            return try channelEntities.compactMap { channelEntity in
+                guard let channel = Channel(entity: channelEntity) else {
+                    return nil
                 }
 
-            return try channels.compactMap { channel in
-                try self.viewContext
+                return try self.viewContext
                     .fetchEpgEntry(for: channel.id, at: Date.now)
                     .map { epgEntity in
                         ChannelItem(
                             id: channel.id,
+                            isFavorite: channelEntity.favorite,
                             channel: channel,
                             currentEpg: EpgEntry(entity: epgEntity)
                         )
@@ -47,22 +49,21 @@ extension CoreDataDataSource: ChannelDataSource {
         }
     }
 
-    func saveAll(channels: [Channel]?) async throws {
+    func saveAll(channels: [ChannelItem]?) async throws {
         let context = backgroundContext
         try await context.perform {
             try context.deleteAllEntities(entityType: ChannelEntity.self)
 
-            try channels?.enumerated().forEach { index, channel in
+            try channels?.enumerated().forEach { index, channelItem in
                 let channelEntity = ChannelEntity(context: context)
 
-                channelEntity.id = channel.id
-                channelEntity.name = channel.name
-                channelEntity.iconUrl = channel.icon?.url
+                channelEntity.id = channelItem.id
+                channelEntity.name = channelItem.channel.name
+                channelEntity.iconUrl = channelItem.channel.icon?.url
 
                 channelEntity.sortOrder = Int32(index)
-                channelEntity.favorite = false
+                channelEntity.favorite = channelItem.isFavorite
 
-                print("ZEFIX - save \(channel.name) as \(index)")
                 try context.saveIfNeeded()
             }
         }

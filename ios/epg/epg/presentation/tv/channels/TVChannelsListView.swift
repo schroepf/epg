@@ -25,7 +25,7 @@ struct TVChannelsListView: View {
 
     private func map(state: ChannelsDomain.State) -> ViewState {
         return ViewState(
-            channelItems: state.channels ?? [],
+            channelItems: state.channels?.filter(\.isFavorite) ?? [],
             onFetchRemoteEpgXml: { store.dispatch(action: AppDomain.Action.fetchEpgDataFromRemoteXmlAsync(url: "https://elres.de/epg")) },
             onFetchLocalEpgXml: { store.dispatch(action: AppDomain.Action.fetchEpgDataFromLocalXml ) },
             onLoadChannels: { store.dispatch(action: ChannelsDomain.Action.fetchAllChannels) }
@@ -84,7 +84,7 @@ struct TVChannelsListView: View {
                     TVSettingsView {
                         viewState.onLoadChannels()
                     } onShowChannelEditor: {
-                        print("ZEFIX - nase")
+                        // no-op
                     } onImportLocalXml: {
                         viewState.onFetchLocalEpgXml()
                     } onImportRemoteXml: {
@@ -113,11 +113,14 @@ struct TVChannelsListView_Previews: PreviewProvider {
             .init(id: "ZDFde", name: "ZDF", icon: .init(url: URL(string: "https://images.tvdirekt.de/images/stories/stations/light/large/zdf.png")!)),
             .init(id: "Sat1DE", name: "Sat.1", icon: .init(url: URL(string: "https://images.tvdirekt.de/images/stories/stations/light/large/sat1_neu.png")!))
         ]
-        let channelItems = channels.map { ChannelItem(id: $0.id, channel: $0, currentEpg: epg) }
+        let channelItems = channels.map { ChannelItem(id: $0.id, isFavorite: true, channel: $0, currentEpg: epg) }
 
         let store = Store(
             reducer: reducer,
-            state: AppDomain.State(channelsState: ChannelsDomain.State(channels: channelItems)),
+            state: AppDomain.State(
+                channelsState: ChannelsDomain.State(channels: channelItems),
+                channelEditorState: ChannelEditorDomain.State(channels: nil)
+            ),
             middlewares: [epgMiddleware(epgService: EpgService())]
         )
 

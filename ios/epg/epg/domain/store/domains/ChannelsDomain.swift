@@ -8,7 +8,6 @@ enum ChannelsDomain {
     enum Action: epg.Action {
         case fetchAllChannels
         case setChannels(channels: [ChannelItem])
-        case onChannelsEdited(channels: [Channel])
     }
 }
 

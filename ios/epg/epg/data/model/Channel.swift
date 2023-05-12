@@ -1,6 +1,6 @@
 import Foundation
 
-struct Channel: Decodable, Identifiable {
+struct Channel: Hashable, Decodable, Identifiable {
     let id: String
     let name: String
     let icon: Icon?

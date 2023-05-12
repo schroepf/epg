@@ -1,6 +1,6 @@
 import Foundation
 
 protocol ChannelRepository {
-    func updateChannels(channels: [Channel]?) async throws
+    func updateChannels(channels: [ChannelItem]?) async throws
     func getAllChannels() async throws -> [ChannelItem]
 }

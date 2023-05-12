@@ -42,6 +42,7 @@
 		AE519A122A0D4E0700D701E7 /* TVChannelEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE519A112A0D4E0700D701E7 /* TVChannelEditorView.swift */; };
 		AE519A172A0E329B00D701E7 /* ChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE519A162A0E329B00D701E7 /* ChannelItem.swift */; };
 		AE519A192A0E342000D701E7 /* EpgEntry+format.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE519A182A0E342000D701E7 /* EpgEntry+format.swift */; };
+		AE519A1B2A0E37A800D701E7 /* ChannelEditorDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE519A1A2A0E37A800D701E7 /* ChannelEditorDomain.swift */; };
 		AE869A352A0A17EE00C5D2C2 /* Result+value.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A342A0A17EE00C5D2C2 /* Result+value.swift */; };
 		AE869A392A0A29A300C5D2C2 /* EpgRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A382A0A29A200C5D2C2 /* EpgRepository.swift */; };
 		AE869A3B2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE869A3A2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift */; };
@@ -106,6 +107,7 @@
 		AE519A112A0D4E0700D701E7 /* TVChannelEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChannelEditorView.swift; sourceTree = "<group>"; };
 		AE519A162A0E329B00D701E7 /* ChannelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItem.swift; sourceTree = "<group>"; };
 		AE519A182A0E342000D701E7 /* EpgEntry+format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpgEntry+format.swift"; sourceTree = "<group>"; };
+		AE519A1A2A0E37A800D701E7 /* ChannelEditorDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEditorDomain.swift; sourceTree = "<group>"; };
 		AE869A342A0A17EE00C5D2C2 /* Result+value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+value.swift"; sourceTree = "<group>"; };
 		AE869A382A0A29A200C5D2C2 /* EpgRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgRepository.swift; sourceTree = "<group>"; };
 		AE869A3A2A0A2A2000C5D2C2 /* EpgRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpgRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			children = (
 				AE519A072A0CDA1D00D701E7 /* AppDomain.swift */,
 				AE519A032A0CCF8E00D701E7 /* ChannelsDomain.swift */,
+				AE519A1A2A0E37A800D701E7 /* ChannelEditorDomain.swift */,
 			);
 			path = domains;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				AE4575F42A0923000003E19D /* Bundle+data.swift in Sources */,
 				AE869A3D2A0A2A8B00C5D2C2 /* EpgDataSource.swift in Sources */,
 				AE519A172A0E329B00D701E7 /* ChannelItem.swift in Sources */,
+				AE519A1B2A0E37A800D701E7 /* ChannelEditorDomain.swift in Sources */,
 				AE5199FE2A0BF29500D701E7 /* TVWallpaperView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
