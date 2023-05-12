@@ -22,6 +22,10 @@ extension CoreDataDataSource: ChannelDataSource {
     func getAll() async throws -> [Channel] {
         return try await viewContext.perform {
             let request = ChannelEntity.fetchRequest()
+            request.sortDescriptors = [
+                .init(SortDescriptor(\ChannelEntity.favorite, order: .reverse)),
+                .init(SortDescriptor(\ChannelEntity.sortOrder, order: .forward))
+            ]
 
             return try self.viewContext
                 .fetch(request)
@@ -50,12 +54,15 @@ extension CoreDataDataSource: ChannelDataSource {
         try await context.perform {
             try context.deleteAllEntities(entityType: ChannelEntity.self)
 
-            try channels?.forEach { channel in
+            try channels?.enumerated().forEach { index, channel in
                 let channelEntity = ChannelEntity(context: context)
 
                 channelEntity.id = channel.id
                 channelEntity.name = channel.name
                 channelEntity.iconUrl = channel.icon?.url
+
+                channelEntity.sortOrder = Int32(index)
+                channelEntity.favorite = false
 
                 try context.saveIfNeeded()
             }

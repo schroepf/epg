@@ -34,6 +34,13 @@ func persistenceMiddleware(
                 dispatch(ChannelsDomain.Action.setChannels(channels: mappedChannels))
             }
 
+
+        case let ChannelsDomain.Action.onChannelsEdited(channels):
+            Task {
+                try await channelRepository.updateChannels(channels: channels)
+                dispatch(ChannelsDomain.Action.fetchAllChannels)
+            }
+
         case let ChannelDetailsDomain.Action.fetchChannelDetails(channelId):
             Task {
                 let selectedChannel = try await channelRepository.getChannel(channelId: channelId)

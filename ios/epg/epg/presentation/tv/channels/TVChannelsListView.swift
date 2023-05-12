@@ -35,57 +35,61 @@ struct TVChannelsListView: View {
     var body: some View {
         let viewState = map(state: store.state.channelsState)
 
-        GeometryReader { geometry in
-            ZStack {
-                TVWallpaperView()
+        NavigationStack {
+            GeometryReader { geometry in
+                ZStack {
+                    TVWallpaperView()
 
-                VStack {
-                    Spacer()
+                    VStack {
+                        Spacer()
 
-                    ScrollView(.horizontal) {
-                        LazyHStack(alignment: .bottom) {
-                            ForEach(viewState.channelItems) { channelItem in
-                                Button {
-                                    // no-op
-                                } label: {
-                                    VStack(alignment: .leading) {
-                                        GeometryReader { geometry in
-                                            LazyImage(url: channelItem.channel.icon?.forSize(size: geometry.size))
+                        ScrollView(.horizontal) {
+                            LazyHStack(alignment: .bottom) {
+                                ForEach(viewState.channelItems) { channelItem in
+                                    Button {
+                                        // no-op
+                                    } label: {
+                                        VStack(alignment: .leading) {
+                                            GeometryReader { geometry in
+                                                LazyImage(url: channelItem.channel.icon?.forSize(size: geometry.size))
+                                            }
+
+                                            Text(channelItem.channel.name)
+                                                .font(.system(size: 16, weight: .bold))
+
+                                            if let currentEpg = channelItem.currentEpg {
+                                                Text(currentEpg.title)
+                                                    .font(.system(size: 24, weight: .bold))
+                                                    .multilineTextAlignment(.leading)
+                                                Text(currentEpg.formatStartEndTimeString())
+                                                    .font(.system(size: 16, weight: .thin))
+                                                    .multilineTextAlignment(.leading)
+                                                Text(currentEpg.summary ?? "-")
+                                                    .font(.system(size: 24, weight: .thin))
+                                                    .multilineTextAlignment(.leading)
+                                            }
+
+                                            Spacer()
                                         }
-
-                                        Text(channelItem.channel.name)
-                                            .font(.system(size: 16, weight: .bold))
-
-                                        if let currentEpg = channelItem.currentEpg {
-                                            Text(currentEpg.title)
-                                                .font(.system(size: 24, weight: .bold))
-                                                .multilineTextAlignment(.leading)
-                                            Text(currentEpg.formatStartEndTimeString())
-                                                .font(.system(size: 16, weight: .thin))
-                                                .multilineTextAlignment(.leading)
-                                            Text(currentEpg.summary ?? "-")
-                                                .font(.system(size: 24, weight: .thin))
-                                                .multilineTextAlignment(.leading)
-                                        }
-
-                                        Spacer()
+                                        .frame(width: 250, height: 400)
                                     }
-                                    .frame(width: 250, height: 400)
+                                    .focusedValue(\.focusedChannel, channelItem)
+                                    .padding(16)
                                 }
-                                .focusedValue(\.focusedChannel, channelItem)
-                                .padding(16)
                             }
                         }
+                        .padding([.bottom], 60)
                     }
-                    .padding([.bottom], 60)
-                }
 
-                TVSettingsView {
-                    viewState.onLoadChannels()
-                } onImportLocalXml: {
-                    viewState.onFetchLocalEpgXml()
-                } onImportRemoteXml: {
-                    viewState.onFetchRemoteEpgXml()
+                    TVSettingsView {
+                        viewState.onLoadChannels()
+                    } onShowChannelEditor: {
+                        print("ZEFIX - nase")
+                    } onImportLocalXml: {
+                        viewState.onFetchLocalEpgXml()
+                    } onImportRemoteXml: {
+                        viewState.onFetchRemoteEpgXml()
+                    }
                 }
             }
         }

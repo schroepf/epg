@@ -4,11 +4,13 @@ struct TVSettingsView: View {
     @State var settingsVisible: Bool = false
 
     let onLoadContentFromDb: () -> Void
+    let onShowChannelEditor: () -> Void
     let onImportLocalXml: () -> Void
     let onImportRemoteXml: () -> Void
 
     enum Setting: Hashable {
         case updateUiFromDb
+        case showChannelEditor
         case importLocalXml
         case importRemoteXml
     }
@@ -42,6 +44,16 @@ struct TVSettingsView: View {
                                     settingsVisible = false
                                 }
                                 .focused($focusedSetting, equals: .updateUiFromDb)
+
+                                NavigationLink {
+                                    TVChannelEditorView()
+                                } label: {
+                                    Text("Manage Channels")
+                                }
+                                .focused($focusedSetting, equals: .showChannelEditor)
+                                .onDisappear {
+                                    settingsVisible = false
+                                }
 
                                 Button("Fetch from Local XML") {
                                     onImportLocalXml()
