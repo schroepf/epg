@@ -19,33 +19,31 @@ class CoreDataDataSource {
 }
 
 extension CoreDataDataSource: ChannelDataSource {
-    func getAll() async throws -> [Channel] {
+    func getAll() async throws -> [ChannelItem] {
         return try await viewContext.perform {
             let request = ChannelEntity.fetchRequest()
             request.sortDescriptors = [
-                .init(SortDescriptor(\ChannelEntity.favorite, order: .reverse)),
                 .init(SortDescriptor(\ChannelEntity.sortOrder, order: .forward))
             ]
 
-            return try self.viewContext
+            let channels = try self.viewContext
                 .fetch(request)
                 .compactMap { channelEntity in
                     Channel(entity: channelEntity)
                 }
-        }
-    }
 
-    func getChannel(channelId: String) async throws -> Channel? {
-        return try await viewContext.perform {
-            let request = ChannelEntity.fetchRequest()
-            request.predicate = NSPredicate(format: "id == %@", channelId)
+            return try channels.compactMap { channel in
+                try self.viewContext
+                    .fetchEpgEntry(for: channel.id, at: Date.now)
+                    .map { epgEntity in
+                        ChannelItem(
+                            id: channel.id,
+                            channel: channel,
+                            currentEpg: EpgEntry(entity: epgEntity)
+                        )
+                    }
 
-            return try self.viewContext
-                .fetch(request)
-                .compactMap { channelEntity in
-                    Channel(entity: channelEntity)
-                }
-                .first
+            }
         }
     }
 
@@ -64,6 +62,7 @@ extension CoreDataDataSource: ChannelDataSource {
                 channelEntity.sortOrder = Int32(index)
                 channelEntity.favorite = false
 
+                print("ZEFIX - save \(channel.name) as \(index)")
                 try context.saveIfNeeded()
             }
         }
@@ -89,33 +88,6 @@ extension CoreDataDataSource: EpgDataSource {
 
                 try context.saveIfNeeded()
             }
-        }
-    }
-
-    func getEntries(channelId: String) async throws -> [EpgEntry] {
-        return try await viewContext.perform {
-            let request = EpgEntryEntity.fetchRequest()
-            request.predicate = NSPredicate(format: "channelId == %@", channelId)
-
-            return try self.viewContext
-                .fetch(request)
-                .compactMap { epgEntity in
-                    EpgEntry(entity: epgEntity)
-                }
-        }
-    }
-
-    func getEntry(channelId: String, at date: Date) async throws -> EpgEntry? {
-        return try await viewContext.perform {
-            let request = EpgEntryEntity.fetchRequest()
-            request.predicate = NSPredicate(format: "(channelId == %@) AND (start <= %@) AND (stop >= %@)", channelId, date as CVarArg, date as CVarArg)
-
-            return try self.viewContext
-                .fetch(request)
-                .compactMap { epgEntity in
-                    EpgEntry(entity: epgEntity)
-                }
-                .first
         }
     }
 }
@@ -147,7 +119,19 @@ extension EpgEntry {
     }
 }
 
+extension EpgEntryEntity {
+    static func fetchRequest(channelId: String, date: Date) -> NSFetchRequest<EpgEntryEntity> {
+        let request = Self.fetchRequest()
+        request.predicate = NSPredicate(format: "(channelId == %@) AND (start <= %@) AND (stop >= %@)", channelId, date as CVarArg, date as CVarArg)
+        return request
+    }
+}
+
 extension NSManagedObjectContext {
+    func fetchEpgEntry(for channelId: String, at date: Date) throws -> EpgEntryEntity? {
+        try fetch(EpgEntryEntity.fetchRequest(channelId: channelId, date: date)).first
+    }
+
     func saveIfNeeded() throws {
         guard hasChanges else {
             return

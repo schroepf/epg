@@ -25,7 +25,7 @@ struct ChannelsListView: View {
 
         VStack {
             List(viewState.channels.map { $0.channel }, id: \.id) { channel in
-                NavigationLink(destination: ChannelDetailsView(channelId: channel.id)) {
+                NavigationLink(destination: Text(channel.id)) {
                     ChannelCell(channel: channel)
                 }
 

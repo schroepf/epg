@@ -51,9 +51,10 @@ struct TVChannelEditorView: View {
             return
         }
 
-        print("ZEFIX - move source: \(source), destination: \(destination)")
+        print("ZEFIX - move source: \(source.first), destination: \(destination)")
+        print("ZEFIX - channels BEFORE: \(channels.map(\.name))")
         channels.move(fromOffsets: source, toOffset: destination)
-        print("ZEFIX - channels: \(channels)")
+        print("ZEFIX - channels AFTER : \(channels.map(\.name))")
 
         store.dispatch(action: ChannelsDomain.Action.onChannelsEdited(channels: channels))
     }

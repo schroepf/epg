@@ -21,8 +21,3 @@ func reducer(state: ChannelsDomain.State, action: Action) -> ChannelsDomain.Stat
     }
 }
 
-struct ChannelItem: Identifiable {
-    let id: String
-    let channel: Channel
-    let currentEpg: EpgEntry?
-}

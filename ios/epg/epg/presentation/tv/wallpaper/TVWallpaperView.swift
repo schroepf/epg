@@ -2,7 +2,6 @@ import NukeUI
 import SwiftUI
 
 struct TVWallpaperView: View {
-    @FocusedValue(\.focusedEpgEntry) var focusedEpgEntry
     @FocusedValue(\.focusedChannel) var focusedChannelItem
 
     var body: some View {
